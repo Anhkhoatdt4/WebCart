@@ -50,6 +50,7 @@ public class CartServlet extends HttpServlet {
 		 	response.setContentType("text/html");
 	        HttpSession session = request.getSession(false);
 	        
+	        System.out.println("Cart Servlet");
 
 	        if (session != null && session.getAttribute("username") != null)
 	        {
@@ -119,13 +120,14 @@ public class CartServlet extends HttpServlet {
 
 	            if ("POST".equalsIgnoreCase(request.getMethod()))
 	            {
-	            //System.out.println("load trang");
-	    
+	            System.out.println("load trang");
+	            
+	            session.setAttribute("IDCart", cart.getCartId());
 	            session.setAttribute("dataPushed", true);
 	            session.setAttribute("cart", cart);
 	            session.setAttribute("cartDetail", cartDetails);
 	            session.setAttribute("listProd", listProduct);
-	            session.setAttribute("cartSize", cartDetails.size());   
+//	            session.setAttribute("cartSize", cartDetails.size());   
 //	             System.out.println(  "so luong san pham "   + cartDetails.size());
 	            request.getRequestDispatcher("cart.jsp").forward(request, response);
 	            }

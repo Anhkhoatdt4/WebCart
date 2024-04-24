@@ -16,6 +16,7 @@ public class CartDetail implements Serializable{
     	
     }
     
+    
     public CartDetail(int cartDetailId, int cartId, Product product, int quantity) {
         this.cartDetailId = cartDetailId;
         this.cartId = cartId;
@@ -56,7 +57,7 @@ public class CartDetail implements Serializable{
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-        this.totalMoney = product.getPprice() * quantity;
+        
     }
 
     public double getTotalMoney() {

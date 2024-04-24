@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.CartDAO;
+import dao.CartDetailDAO;
 import dao.ProductDAO;
 import model.Product;
 
@@ -23,6 +25,7 @@ public class ProductServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	ProductDAO productDAO = new ProductDAO();
+    	CartDetailDAO cd = new CartDetailDAO();
         List<Product> allProducts = productDAO.getAll();
 
         int numPage = 8;
@@ -42,15 +45,17 @@ public class ProductServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         
-        
-//        System.out.println("page " + Pagenow + "start" + startIndex + "End" + endIndex);
-		/* System.out.println("data " + currentPageProducts ); */
-//        System.out.println("num" + totalPages);
         session.setAttribute("data", currentPageProducts);
         session.setAttribute("num", totalPages);
         session.setAttribute("page", Pagenow);
-
+        Integer cartID = (Integer) session.getAttribute("IDCart");
+        CartDAO a = new CartDAO(); 
         
+        if (session != null && session.getAttribute("loggedIn") != null) 
+        {
+		Integer userID = (Integer) session.getAttribute("userID");
+        session.setAttribute("cartSize", cd.quantityOfCartDetail(a.getCartByUserId(userID).getCartId())); 
+        }
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }
 

@@ -57,7 +57,7 @@ public class SearchServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         
-        
+        System.out.println("ewqewqewq");
         System.out.println("page " + Pagenow + "start" + startIndex + "End" + endIndex);
         System.out.println( "gia tri query " + query);
 		

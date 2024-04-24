@@ -1,57 +1,71 @@
 package model;
 
 public class OrderDetail {
-    private int orderId;
-    private Product product;
+    private int orderDetailId;
+    private int productID;
     private int quantity;
     private double price;
-
-    public OrderDetail(int orderId, Product product, int quantity, double price) {
-        this.orderId = orderId;
-        this.product = product;
-        this.quantity = quantity;
-        this.price = price;
+    private int orderId; 
+    
+    public OrderDetail()
+    {
+    	
     }
 
-    public int getOrderId() {
-        return orderId;
-    }
+	public OrderDetail(int orderDetailId, int productID, int quantity, double price, int orderId) {
+		this.orderDetailId = orderDetailId;
+		this.productID = productID;
+		this.quantity = quantity;
+		this.price = price;
+		this.orderId = orderId;
+	}
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
+	public int getOrderDetailId() {
+		return orderDetailId;
+	}
 
-    public Product getProduct() {
-        return product;
-    }
+	public void setOrderDetailId(int orderDetailId) {
+		this.orderDetailId = orderDetailId;
+	}
 
-    public void setProduct(Product product) {
-        this.product = product;
-    }
+	public int getProductID() {
+		return productID;
+	}
 
-    public int getQuantity() {
-        return quantity;
-    }
+	public void setProductID(int productID) {
+		this.productID = productID;
+	}
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+	public int getQuantity() {
+		return quantity;
+	}
 
-    public double getPrice() {
-        return price;
-    }
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
+	public double getPrice() {
+		return price;
+	}
 
-    @Override
-    public String toString() {
-        return "OrderDetail{" +
-                "orderId=" + orderId +
-                ", product=" + product +
-                ", quantity=" + quantity +
-                ", price=" + price +
-                '}';
-    }
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public int getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
+
+	@Override
+	public String toString() {
+		return "OrderDetail [orderDetailId=" + orderDetailId + ", productID=" + productID + ", quantity=" + quantity
+				+ ", price=" + price + ", orderId=" + orderId + "]";
+	}
+
+	
+    
 }

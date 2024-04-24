@@ -93,7 +93,7 @@ public class Product implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Product [pId=" + pId + ", pname=" + pname +  
+		return "Product [pId=" + pId + ", pname=" + pname +  " psize = " + psize + 
 				  ", pquantity=" + pquantity + ", pprice=" + pprice + ", category_id=" + category_id + "]" + "\n";
 	}
 	

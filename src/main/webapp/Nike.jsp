@@ -76,20 +76,49 @@
             <div class="icons">
     <i class="fa-solid fa-heart"></i>
     <i class="fa-solid fa-cart-shopping"></i>
-    <c:choose>
-        <c:when test="${empty sessionScope.username}">
-            <!-- Nếu không có sessionScope.username, chuyển hướng đến trang login.jsp -->
-            <a href="login.jsp" style="text-decoration: none; color :black">
-                <i class="fa-solid fa-user"></i> Đăng nhập
-            </a>
-        </c:when>
-        <c:otherwise>
-            <!-- Nếu có sessionScope.username, chuyển hướng đến trang account.jsp -->
-            <a href="Account.jsp" style="text-decoration: none; color :black">
-                <i class="fa-solid fa-user"></i> ${sessionScope.username}
-            </a>
-        </c:otherwise>
-    </c:choose>
+   <c:choose>
+    <c:when test="${empty sessionScope.username}">
+        <a href="login.jsp" style="text-decoration: none; color :black">
+            <i class="fa-solid fa-user"></i> Đăng nhập
+        </a>
+    </c:when>
+    <c:otherwise>
+        <a class="user-link" style="text-decoration: none; color: black; position: relative ;">
+            <i class="fa-solid fa-user"></i> ${sessionScope.username}
+        </a>
+        <div style = "
+        		position: absolute;
+			    width: 103px;
+			    height: 18px;
+			    border: 1px solid red;
+			    background: green;
+			    top: 32px;
+			    right: 62px;
+			    display: none;
+        "
+        >
+        </div>
+        <div class="dropdown-content" style=" 
+            position: absolute;
+            top: 65%;
+            left : auto;
+            right: 74px ;
+            background-color: white;
+            padding: 10px;
+            border: 1px solid rgb(244 12 170);
+            z-index: 999;
+            border-radius: 14px;
+            height: 75px;
+            width: 150px;
+            
+        ">
+            <a class = "form-ah" href="Account.jsp" style="text-decoration: none ; font-size: 16px">Tài khoản của tôi</a> <br>
+            <a class = "form-ah" href="purchaseOrder.jsp" style="text-decoration:none ;font-size: 16px ; color : #333;">Đơn mua</a> <br>
+            <a class = "form-ah" href="logout" style="text-decoration:none ;font-size: 16px ; color : #333;">Đăng xuất</a> <br> 
+        </div>
+        
+    </c:otherwise>
+</c:choose>
 </div>
 
         </nav>
@@ -245,4 +274,51 @@
        
         
     </body>
+    <script type="text/javascript">
+	document.addEventListener("DOMContentLoaded", function() {
+	    var userLink = document.querySelector(".user-link");
+	    var dropdownContent = document.querySelector(".dropdown-content");
+	    var linkA = document.querySelectorAll(".form-ah");
+
+	    if (userLink && dropdownContent) {
+	        userLink.addEventListener("mouseover", function() {
+	            dropdownContent.style.display = "block";
+	        });
+
+	        userLink.addEventListener("mouseout", function(event) {
+	            if (!isMouseOverUserLinkOrDropdown(event)) {
+	                dropdownContent.style.display = "none";
+	            }
+	        });
+
+	        dropdownContent.addEventListener("mouseover", function() {
+	            dropdownContent.style.display = "block";
+	        });
+
+	        dropdownContent.addEventListener("mouseout", function(event) {
+	            if (!isMouseOverUserLinkOrDropdown(event)) {
+	                dropdownContent.style.display = "none";
+	            }
+	        });
+	    } else {
+	        console.log("Không tìm thấy userLink hoặc dropdownContent");
+	    }
+
+	    linkA.forEach(function(link) {
+	        link.addEventListener("mouseover", function() {
+	            this.style.color = "#c72092";
+	        });
+	        link.addEventListener("mouseout", function() {
+	            this.style.color = "#333";
+	        });
+	    });
+
+	    function isMouseOverUserLinkOrDropdown(event) {
+	        return userLink.contains(event.relatedTarget) || dropdownContent.contains(event.relatedTarget);
+	    }
+	});
+
+
+    </script>
+       
     </html>

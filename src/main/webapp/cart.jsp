@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"  isELIgnored="false"%>
+<%@page import="model.CartDetail"%>
+<%@page import="java.util.List"%>
 <%@taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,14 +26,15 @@
 
     <div class="container">
         <section id="cart"> 
-            <c:forEach var="cartDetail" items="${sessionScope.cartDetail}">
+       
+            <c:forEach var="cartDetail" items="${cartDetail}">
                 <article class="product">
                     <div class="product-content">
                         <header>
-                            <a class="remove">
-                                <img style="width: 240px;height: 192px" src="${cartDetail.product.pimage}" alt="">
-                                <h3>Remove product</h3>
-                            </a>
+                           <a class="remove">
+							    <img style="width: 240px;height: 192px" src="${cartDetail.product.pimage}" alt="">
+							    <h3>Remove product</h3>
+							</a>
                         </header>
                         <div class="content">    
                             <h1>${cartDetail.product.pname}</h1>     
@@ -49,7 +52,7 @@
                                     <input type="checkbox" class="product-checkbox" 
                                         data-product-id="${cartDetail.product.pId}" 
                                         data-price="${product.pprice}"
-                                        data-id="${cart.cartId}"
+                                        data-id="${IDCart}"
                                         style=" 
                                             margin-left: 22px;
                                             vertical-align: middle;
@@ -77,7 +80,7 @@
 
             <div class="right">
                 <h1 class="total">Tổng tiền: <span></span></h1>
-                <a class="btn" href="home.jsp">Thanh toán</a>
+                <a class="btn" href="payshop.jsp">Thanh toán</a>
             </div>
         </div>
     </footer>
@@ -85,6 +88,20 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+	
+/* 	var removeButtons = document.querySelectorAll('.product-content a');
+    console.log(removeButtons);
+    removeButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var productId = button.dataset.productIdA;
+            console.log('Product ID:', productId);
+            // Gửi productId trong fetch API
+        });
+    }); */
+	
+	
+	
+	
     var minusButtons = document.querySelectorAll('footer .qt-minus');
     var quantityElements = document.querySelectorAll('footer .qt');
     var plusButtons = document.querySelectorAll('footer .qt-plus');
@@ -99,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var totalMoney = 0;
     totalMoneyElement.style.display = 'none';
 
-    console.log(priceElements);
+    
     
     hiddenPriceElements.forEach(function(hiddenPriceElement) {
         var hiddenPriceValue = parseFloat(hiddenPriceElement.value);
@@ -210,6 +227,61 @@ checkboxes.forEach(function(checkbox) {
         }
     });
 });
+
+
+document.addEventListener('DOMContentLoaded', function(){
+    const checkButton = document.querySelector('.btn');
+    const checkBoxes = document.querySelectorAll('.product-checkbox');
+    const selectedProducts = []; 
+
+    checkButton.addEventListener('click', function() {
+        const selectProducts = [];
+        checkBoxes.forEach(function(checkbox) {
+            if (checkbox.checked) {
+            	const cartID = checkbox.dataset.id;
+            	console.log(cartID);
+                const productID = parseInt(checkbox.dataset.productId); 
+                const priceP = parseFloat(checkbox.dataset.price);
+                const quantityElement = checkbox.closest('.product').querySelector('.qt');
+                const newQuantity = parseInt(quantityElement.textContent); 
+                selectedProducts.push({ cartID: cartID, productID: productID, price: priceP, quantity: newQuantity });
+            }
+        });
+        console.log(selectedProducts); 
+
+        if (selectedProducts.length > 0) {
+            fetch('http://localhost:8082/WebCart/payshop', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body:  JSON.stringify(selectedProducts)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Lỗi khi gửi dữ liệu đến máy chủ');
+                }
+               
+                return response.json();
+            })
+            .then(data => {
+   
+                console.log('Dữ liệu phản hồi từ máy chủ:', data);
+                
+               /*  window.location.href = 'http://example.com/payment-success'; */
+            })
+            .catch(error => {
+                console.error('Lỗi:', error);
+            });
+        } else {
+            alert('Vui lòng chọn ít nhất một sản phẩm để thanh toán.');
+        }
+    });
+});
+	 
+	
+
+
 </script>
 
     </body>

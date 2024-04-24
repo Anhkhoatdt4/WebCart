@@ -104,7 +104,20 @@ public class CartDAO {
 		 
 		 return cart;
 	 }
-	
+	 public void deleteCart(int id)
+	 {
+		 String sql = "delete from pbl3.order where user_id=?";
+		 Connection con = DBContext.getConnection();
+		 try {
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setInt(1, id);
+			 int rowsAffected = st.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
+	 }
 	
 	
 	
@@ -114,7 +127,7 @@ public class CartDAO {
 //		List<CartDetail> cartDetails = a.getCartDetailsByCartId(101, pdb);
 //		System.out.println(cartDetails);
 		
-		Cart b = a.getCartByUserId(1);
+		Cart b = a.getCartByUserId(7);
 		System.out.println(b);
 	}
 }

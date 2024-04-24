@@ -911,3 +911,22 @@ button {
 button:hover {
     background-color: #45a049;
 }
+
+.user-info {
+    position: relative; /* Đặt position là relative */
+}
+
+.dropdown-content {
+    display: none; /* Ẩn menu dropdown mặc định */
+    position: absolute;
+    top: 100%; /* Hiển thị menu dropdown dưới phần tử cha */
+    left: 0;
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    z-index: 999;
+}
+
+.user-info:hover .dropdown-content {
+    display: block; /* Hiển thị menu dropdown khi hover vào phần tử cha */
+}

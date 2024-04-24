@@ -34,6 +34,8 @@
         background-color: chocolate;
     }
 	</style>
+	
+	
 
 </head>
 <body>
@@ -78,7 +80,7 @@
            
             <div class="icons">
     
-    <i class="fa-solid fa-cart-shopping" id = "cartIcon" style="position: relative; margin: 0px 20px;
+    <i class="fa-solid fa-cart-shopping" id = "cartIcon" style="position: relative ; margin: 0px 20px;
     	">
     	<span id="cartItemCount" 
     		style="position: absolute;
@@ -89,22 +91,52 @@
 			  border-radius: 50%; 
 			  padding: 4px 7px;
 			  font-size: 10px;"
-    	>${sessionScope.cartSize}</span>
+    	>${cartSize}</span>
     </i>
-    <c:choose>
-        <c:when test="${empty sessionScope.username}">
-          
-            <a href="login.jsp" style="text-decoration: none; color :black">
-                <i class="fa-solid fa-user"></i> Đăng nhập
-            </a>
-        </c:when>
-        <c:otherwise>
+  <c:choose>
+    <c:when test="${empty sessionScope.username}">
+        <a href="login.jsp" style="text-decoration: none; color :black">
+            <i class="fa-solid fa-user"></i> Đăng nhập
+        </a>
+    </c:when>
+    <c:otherwise>
+        <a class="user-link" style="text-decoration: none; color: black; position: relative ;">
+            <i class="fa-solid fa-user"></i> ${sessionScope.username}
+        </a>
+        <div style = "
+        		position: absolute;
+			    width: 103px;
+			    height: 18px;
+			    border: 1px solid red;
+			    background: green;
+			    top: 32px;
+			    right: 62px;
+			    display: none;
+        "
+        >
+        </div>
+        <div class="dropdown-content" style=" 
+            position: absolute;
+            top: 65%;
+            left : auto;
+            right: 74px ;
+            background-color: white;
+            padding: 10px;
+            border: 1px solid rgb(244 12 170);
+            z-index: 999;
+            border-radius: 14px;
+            height: 75px;
+            width: 150px;
             
-            <a href="Account.jsp" style="text-decoration: none; color :black">
-                <i class="fa-solid fa-user"></i> ${sessionScope.username}
-            </a>
-        </c:otherwise>
-    </c:choose>
+        ">
+            <a class = "form-ah" href="Account.jsp" style="text-decoration: none ; font-size: 16px">Tài khoản của tôi</a> <br>
+            <a class = "form-ah" href="orderManage" style="text-decoration:none ;font-size: 16px ; color : #333;">Đơn mua</a> <br>
+            <a class = "form-ah" href="logout" style="text-decoration:none ;font-size: 16px ; color : #333;">Đăng xuất</a> <br> 
+        </div>
+        
+    </c:otherwise>
+</c:choose>
+
 </div>
 
 
@@ -138,23 +170,12 @@
 
     </section>
 
-	<%-- <div class="pagination">
-        <c:forEach begin="1" end="${num}" var="i">
-            <a href="search?query=${query}&page=${i}">${i}</a>
-        </c:forEach>
-    </div> --%>
-
-    <!--Products-->
-	
-	<%-- <h1>Username : ${username}</h1>
-	<h1>Password : ${password}</h1> --%>
-
-
     <div class="products" id="Products">
     <h1>Products</h1>
     	<div class="box">
     	
     	<c:forEach var="p" items="${data}"> 
+    	 <c:if test="${p.psize ne 0 }">
         	<div class="card">
             	<div class="small_card" style="z-index: 1">
                 	<i class="fa-solid fa-heart"></i>
@@ -180,6 +201,7 @@
 	                <a href="detailproduct?pid=${p.pId}" class="btn">Add To Cart</a>
 	            </div>
 	        </div>
+	        </c:if>
         </c:forEach>
     </div>
     
@@ -193,10 +215,18 @@
                     <c:param name="page" value="${pageNumber}"/>
                     <%-- <c:param name="num" value="${size}"/> --%>
                 </c:url>
-                <a href="${pageURL}">${pageNumber}</a>
+                <a href="${pageURL}" style="color: red;
+			    font-size: 22px;
+			    float: left;
+			    padding: 4px 16px;
+			    text-decoration: none;
+			    background-color: #f5e1f4;
+			    border-radius: 23px;
+			    margin-right: 5px;">${pageNumber}</a>
             </c:forEach>
         </c:if>
     </div>
+    
     
     
     
@@ -213,13 +243,7 @@
 
             <div class="about_main">
                 <div class="about_image">
-                    <!-- <div class="about_small_image">
-                        <img src="image/red_shoes1.png" onclick="functio(this)">
-                        <img src="image/red_shoes2.png" onclick="functio(this)">
-                        <img src="image/red_shoes3.png" onclick="functio(this)">
-                        <img src="image/red_shoes4.png" onclick="functio(this)">
-                    </div> -->
-
+                 
                     <div class="image_contaner">
                         <img src="https://cdn.snkrdunk.com/uploads/media/20230228062418-0.jpeg?size=l" id="imagebox">
                     </div>
@@ -299,7 +323,55 @@
 		var e = document.getElementById('cartIcon').addEventListener("click",function(){
 			window.location.href = "cart.jsp";
 			})
+			
 	</script>
+	
+	<script type="text/javascript">
+	document.addEventListener("DOMContentLoaded", function() {
+	    var userLink = document.querySelector(".user-link");
+	    var dropdownContent = document.querySelector(".dropdown-content");
+	    var linkA = document.querySelectorAll(".form-ah");
+
+	    if (userLink && dropdownContent) {
+	        userLink.addEventListener("mouseover", function() {
+	            dropdownContent.style.display = "block";
+	        });
+
+	        userLink.addEventListener("mouseout", function(event) {
+	            if (!isMouseOverUserLinkOrDropdown(event)) {
+	                dropdownContent.style.display = "none";
+	            }
+	        });
+
+	        dropdownContent.addEventListener("mouseover", function() {
+	            dropdownContent.style.display = "block";
+	        });
+
+	        dropdownContent.addEventListener("mouseout", function(event) {
+	            if (!isMouseOverUserLinkOrDropdown(event)) {
+	                dropdownContent.style.display = "none";
+	            }
+	        });
+	    } else {
+	        console.log("Không tìm thấy userLink hoặc dropdownContent");
+	    }
+
+	    linkA.forEach(function(link) {
+	        link.addEventListener("mouseover", function() {
+	            this.style.color = "#c72092";
+	        });
+	        link.addEventListener("mouseout", function() {
+	            this.style.color = "#333";
+	        });
+	    });
+
+	    function isMouseOverUserLinkOrDropdown(event) {
+	        return userLink.contains(event.relatedTarget) || dropdownContent.contains(event.relatedTarget);
+	    }
+	});
+
+
+    </script>
        
         
     </body>

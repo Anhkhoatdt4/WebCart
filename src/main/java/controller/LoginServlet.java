@@ -14,17 +14,19 @@ import model.User;
 
 @WebServlet(urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		System.out.println("LO gin ser v let");
 		super.doGet(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("hello");
 		response.setContentType("text/html;charset=UTF-8");
 		HttpSession session = request.getSession();
-		System.out.println("hello");
 		String username = request.getParameter("user");
 		String password = request.getParameter("password");
 		System.out.println(username + password);
@@ -47,6 +49,7 @@ public class LoginServlet extends HttpServlet{
             	session.setAttribute("userID", ID);
             	session.setAttribute("username", username); 
                 session.setAttribute("password", password);
+                session.setAttribute("loggedIn", true);
                 // session.removeAttribute("errorMessage");
                 
                 request.getRequestDispatcher("home.jsp").forward(request, response);

@@ -37,33 +37,77 @@
             </div>
             
             
-             <div class="search-container">
-		        <form action="search" method="get">
-                    <input type="text" name="query" placeholder="Search...">
-                    <button type="submit">Search</button>
+             <div class="search-container" style="margin-right: -115px">
+		        <form action="search" method="get" >
+                    <input value="${txtS}"  type="text" name="query" placeholder="Search..." style="width: 125px; padding: 6px;">
+                    <button type="submit" 
+                    style="
+                    padding : 4px 5px; background: linear-gradient(to right, #c72092, #6c14d0);">Search</button>
                 </form>
    			 </div>
             
             
 
+           
             <div class="icons">
-	    <i class="fa-solid fa-heart"></i>
-	    <i class="fa-solid fa-cart-shopping"></i>
-	    <c:choose>
-	        <c:when test="${empty sessionScope.username}">
-	            <!-- Nếu không có sessionScope.username, chuyển hướng đến trang login.jsp -->
-	            <a href="login.jsp" style="text-decoration: none; color :black">
-	                <i class="fa-solid fa-user"></i> Đăng nhập
-	            </a>
-	        </c:when>
-	        <c:otherwise>
-	            <!-- Nếu có sessionScope.username, chuyển hướng đến trang account.jsp -->
-	            <a href="Account.jsp" style="text-decoration: none; color :black">
-	                <i class="fa-solid fa-user"></i> ${sessionScope.username}
-	            </a>
-	        </c:otherwise>
-	    </c:choose>
-	</div>
+    
+    <i class="fa-solid fa-cart-shopping" id = "cartIcon" style="position: relative ; margin: 0px 20px;
+    	">
+    	<span id="cartItemCount" 
+    		style="position: absolute;
+			  top: -11px; 
+			  right: -11px; 
+			  background: linear-gradient(to right, #df18a0, #6c14d0); 
+			  color: white; 
+			  border-radius: 50%; 
+			  padding: 4px 7px;
+			  font-size: 10px;"
+    	>${sessionScope.cartSize}</span>
+    </i>
+  <c:choose>
+    <c:when test="${empty sessionScope.username}">
+        <a href="login.jsp" style="text-decoration: none; color :black">
+            <i class="fa-solid fa-user"></i> Đăng nhập
+        </a>
+    </c:when>
+    <c:otherwise>
+        <a class="user-link" style="text-decoration: none; color: black; position: relative ;">
+            <i class="fa-solid fa-user"></i> ${sessionScope.username}
+        </a>
+        <div style = "
+        		position: absolute;
+			    width: 103px;
+			    height: 18px;
+			    border: 1px solid red;
+			    background: green;
+			    top: 32px;
+			    right: 62px;
+			    display: none;
+        "
+        >
+        </div>
+        <div class="dropdown-content" style=" 
+            position: absolute;
+            top: 65%;
+            right : 38px;
+            background-color: white;
+            padding: 10px;
+            border: 1px solid rgb(244 12 170);
+            z-index: 999;
+            border-radius: 14px;
+            height: 75px;
+            display: none; 
+        ">
+            <a class = "form-ah" href="Account.jsp" style="text-decoration: none ; font-size: 16px">Tài khoản của tôi</a> <br>
+            <a class = "form-ah" href="purchaseOrder.jsp" style="text-decoration:none ;font-size: 16px ; color : #333;">Đơn mua</a> <br>
+            <a class = "form-ah" href="#" style="text-decoration:none ;font-size: 16px ; color : #333;">Đăng xuất</a> <br> 
+        </div>
+        
+    </c:otherwise>
+</c:choose>
+
+</div>
+
 
         </nav>
 
