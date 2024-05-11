@@ -33,8 +33,46 @@ public class CategoryDAO {
 		
 		return list;
 	}
+	
+	public int[] getTotalCategoryByMonth(String s)
+	{
+		int[] tam=new int[5];
+		String sql="select cid,cname,SUM(quantity) as total from "
+				+"(select product.pid,cid ,category.cname from product join category on product.category_id=cid   )  AS TAM "
+				+"join "
+				+"( select product_id, SUM(quantity) as quantity from order_detail join pbl3.order on order_detail.order_id= pbl3.order.orderId "
+				+"where date like ? "
+				+"group by product_id)  as TAM2 "
+				+"on TAM.pid=TAM2.product_id "
+				+"group by cid,category.cname "
+				+"order by cid ";
+		System.out.println("Ok");
+		try {
+			Connection connection=DBContext.getConnection();
+			PreparedStatement st=connection.prepareStatement(sql);
+			st.setString(1, "%" + s +"%");
+			int i=1;
+			ResultSet rs=st.executeQuery();
+
+			while (rs.next())
+			{		
+
+				tam[i]=rs.getInt("total");
+				System.out.println("OK1"+tam[i]);
+				i++;	
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return tam;
+	}
 	public static void main(String[] args) {
-		CategoryDAO a = new CategoryDAO();
-		System.out.println(a.getAll());
+		CategoryDAO categoryDAO = new CategoryDAO();
+	    int[] result = categoryDAO.getTotalCategoryByMonth("04");
+
+	    // In ra mảng kết quả
+	    for (int i = 1; i < result.length; i++) {
+	        System.out.println("Category " + (i ) + ": " + result[i]);
+	    }
 	}
 }

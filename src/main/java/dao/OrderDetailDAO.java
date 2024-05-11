@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import context.DBContext;
 import model.OrderDetail;
@@ -92,28 +94,29 @@ public class OrderDetailDAO {
     }
 
     
-    public List<OrderDetail> listGetOrderDetail(int id)
+    public OrderDetail listGetOrderDetail(int id)
     {
-    	String sql = "Select * from pbl3.order_detail where order_id = ?";
-    	List<OrderDetail> list = new ArrayList<>();
+    	String sql = "Select * from order_detail where order_id = ? "
+    			+"order by order_detail.orderdetail_id "
+    			+ "limit 1";
+    	OrderDetail orderDetail=new OrderDetail();
     	Connection conn = DBContext.getConnection();
     	try {
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setInt(1, id);
 			ResultSet rs = st.executeQuery();
-			while(rs.next())
+			if(rs.next())
 			{
-				OrderDetail o = new OrderDetail(rs.getInt("orderdetail_id"), rs.getInt("product_id"), rs.getInt("quantity"), rs.getDouble("price"), id);
-				list.add(o);
+				orderDetail= new OrderDetail(rs.getInt("orderdetail_id"), rs.getInt("product_id"), rs.getInt("quantity"), rs.getDouble("price"), id);
 			}
+			return orderDetail;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	
     	
-    	
-    	return list;
+    	return null;
     }
     
     public void deleteOrderDetail(int id)
@@ -131,10 +134,30 @@ public class OrderDetailDAO {
 		 
 	 }
     
+    public  Map<Product,Integer> getProductByOrderId(int id)
+    {
+		Map<Product,Integer> list=new HashMap<Product, Integer>();
+    	String sql="SELECT * FROM order_detail WHERE order_id = ? ";
+    	 try (Connection connection = DBContext.getConnection();
+                 PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, id);
+                ResultSet resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                  int proId=resultSet.getInt("product_id");
+                  //System.out.println();
+                  ProductDAO proDao=new ProductDAO();
+                  Product pro=proDao.getProductById(proId);
+  				list.put(pro,resultSet.getInt("quantity"));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+    	 return list;
+    }
     
     public static void main(String[] args) {
 		OrderDetailDAO a = new OrderDetailDAO();
-		System.out.println(a.getAllOrderDetails());
+		System.out.println(a.listGetOrderDetail(12));
 //		List<OrderDetail> b = a.listGetOrderDetail(4);
 //		System.out.println(b);
 //		System.out.println(a.getOrderId("Đang vận chuyển", 2));

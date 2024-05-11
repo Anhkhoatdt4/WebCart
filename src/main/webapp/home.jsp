@@ -47,8 +47,17 @@
                 <h1><span> BKN</span> Shoes</span></h1>
             </div>
 
-			<div class="banner" style="width: 21%; ">
+			<div class="banner" style="width: 31%; ">
                 <ul class="ul-header">
+                <c:choose>
+				    <c:when test="${sessionScope.roleUser eq 1}">
+				        <a href="ControlManage" style="text-decoration: none; color :black">
+				            <i class="fa-solid fa-cog" style="font-size: 15px;"></i> Admin
+				        </a>
+				    </c:when>
+				</c:choose>
+                
+                
                     <li><a href="home">Home</a></li>
                     <li><a href="#Nike" class="a_header">Products</a>
                         <div class="banner_header" style="right: 135px">

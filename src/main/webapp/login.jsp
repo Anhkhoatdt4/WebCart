@@ -38,7 +38,7 @@
                 <input type="password" name="password" placeholder="Mật khẩu">
             </div>
 
-            <p class="forget">Quên mật khẩu?</p>
+            <p class="forget"><a href = "forgotPass.jsp" style="color: red;"> Quên mật khẩu? </a></p>
 
       		
             

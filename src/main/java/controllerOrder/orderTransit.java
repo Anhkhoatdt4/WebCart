@@ -44,7 +44,7 @@ public class orderTransit extends HttpServlet {
 		
 		List<OrderDetail> listOrderDetailByTransit = new ArrayList<>();
 		for (Integer orderId : listIdInTransit) {
-		    listOrderDetailByTransit.addAll(orderDetailDao.listGetOrderDetail(orderId));
+		    listOrderDetailByTransit.add(orderDetailDao.listGetOrderDetail(orderId));
 		}
 		
 		session.setAttribute("listOrderDetailsInOrderByTransit", listOrderDetailByTransit);

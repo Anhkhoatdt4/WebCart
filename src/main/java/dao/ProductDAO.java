@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,11 +37,13 @@ public class ProductDAO {
 
 	
 	
-	public int getMaxProductId() {
-	    String sql = "SELECT MAX(pid) AS maxId FROM product";
-	    try (Connection connection = DBContext.getConnection();
-	         PreparedStatement statement = connection.prepareStatement(sql);
-	         ResultSet resultSet = statement.executeQuery()) {
+	public int getMaxProductId(int cid) {
+	    String sql = "SELECT MAX(pid) AS maxId FROM product where  category_id=?";
+	    try {Connection connection = DBContext.getConnection();
+	    		PreparedStatement st = connection.prepareStatement(sql);
+		    	st.setInt(1, cid);
+
+	    	ResultSet resultSet = st.executeQuery();
 	        if (resultSet.next()) {
 	            return resultSet.getInt("maxId");
 	        } else {
@@ -51,6 +55,7 @@ public class ProductDAO {
 	        return 0;
 	    }
 	}
+	
 	public List<Product>getAll()
 	{
 		List<Product> list = new ArrayList<>();
@@ -308,6 +313,37 @@ public class ProductDAO {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	public List<Product> sapXep(String s)
+	{
+		ProductDAO dao=new ProductDAO();
+		List<Product>   list= dao.getAll();
+		 Comparator<Product> comparator = new Comparator<Product>() {
+	            @Override
+	            public int compare(Product p1, Product p2) {
+	                // Thực hiện so sánh các trường tương ứng với chuỗi s
+	                if (s.equals("id")) {
+	                    if (p1.getpId()<p2.getpId()) return -1;
+	                    else return 1;
+	                } else if (s.equals("name")) {
+	                    return p1.getPname().compareTo(p2.getPname());
+	                }
+	                else if (s.equals("price")) {
+	                    if (p1.getPprice()<p2.getPprice()) return -1;
+	                    else if (p1.getPprice()==p2.getPprice()) return 0;
+	                    else return 1;
+	                }else if (s.equals("quantity")) {
+		                    if (p1.getPquantity()<p2.getPquantity()) return -1;
+		                    else if (p1.getPquantity()==p2.getPquantity()) return 0;
+		                    else return 1;}
+	                return 0;
+	            }
+	        };
+
+	        
+	        Collections.sort(list, comparator);
+	        return list;
 	}
 	
 	

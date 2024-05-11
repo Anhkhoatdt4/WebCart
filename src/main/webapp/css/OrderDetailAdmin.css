@@ -1,0 +1,309 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: "Arial", sans-serif;
+    background-color: #f5f5f5;
+}
+.container{
+    display: flex;
+}
+.header{
+    background-color: rgb(0, 28, 64);
+    color: white;
+    padding: 30px;
+    width: 100%;
+    height: 40px;
+}
+.header ul li{
+    list-style-type: none;
+    margin-bottom: -8px;
+    margin-right: 20px;
+    
+}
+.header ul li a{
+    float: right;
+    color: black;
+    text-decoration: none;
+    border: 1px solid rgb(0, 28, 64);
+    padding: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: yellow;
+    margin-top: -24px;
+}
+.header ul li a:hover{
+    color: red;
+}
+.container{
+    display: flex;
+}
+.menu { 
+    flex:1;
+    border-right: 3px solid #717171;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    flex-grow: 3;
+    max-width: calc(20% - 40px);
+    background-color: rgb(0, 28, 64);
+    border-radius: 5px;
+    margin-top: -60px;
+    height: 750px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.image{
+    max-width: 30%;
+    border-radius: 60%;
+    margin-top: 20px;
+}
+.menu ul li{
+    text-align: center;
+    color: white;
+}
+.menu ul h1{
+    text-align: center;
+    color: white;
+}
+.but0{
+    padding: 20px 40px;
+    border: 2px solid rgb(0, 28, 64);
+    background-color: rgb(0, 28, 64);
+    color: white;
+    border-radius: 10px; /* Độ cong của góc nút */
+    font-size: 15px;
+    font-weight: bold;
+    white-space: nowrap;
+    margin-bottom: 10px;
+}
+.but0 img{
+    margin-right: 20px;
+}
+.but1{
+    padding: 20px 27px;
+    border: 2px solid rgb(0, 28, 64);
+    background-color: rgb(0, 28, 64);
+    color: white;
+    border-radius: 10px; /* Độ cong của góc nút */
+    font-size: 15px;
+    font-weight: bold;
+    white-space: nowrap;
+    margin-bottom: 10px;
+}
+.but1 img{
+    margin-right: 20px;
+}
+.but2{
+    padding: 20px 32px;
+    border: 2px solid rgb(0, 28, 64);
+    background-color: rgb(0, 28, 64);
+    color: white;
+    border-radius: 10px; /* Độ cong của góc nút */
+    font-size: 15px;
+    font-weight: bold;
+    white-space: nowrap;
+    margin-bottom: 10px;
+}
+.but2 img{
+    margin-right: 20px;
+}
+.but3{
+    padding: 20px 33px;
+    border: 2px solid rgb(0, 28, 64);
+    background-color: rgb(0, 28, 64);
+    color: white;
+    border-radius: 10px; /* Độ cong của góc nút */
+    font-size: 15px;
+    font-weight: bold;
+    white-space: nowrap;
+    margin-bottom: 10px;
+}
+.but3 img{
+    margin-right: 20px;
+}
+.but4{
+    padding: 20px 30px;
+    border: 2px solid rgb(0, 28, 64);
+    background-color: rgb(0, 28, 64);
+    color: white;
+    border-radius: 10px; /* Độ cong của góc nút */
+    font-size: 15px;
+    font-weight: bold;
+    white-space: nowrap;
+    margin-bottom: 10px;
+}
+.but4 img{
+    margin-right: 20px;
+}
+.but0:hover{
+    background-color: #717171;
+}
+.but1:hover{
+    background-color: #717171;
+}
+.but2:hover{
+    background-color: #717171;
+}
+.but3:hover{
+    background-color: #717171;
+}
+.but4:hover{
+    background-color: #717171;
+}
+.main{
+    display: flex;
+    flex-direction: column;
+}
+.time{
+    width: 1236px;
+    height: 35px;
+    background-color: white;
+    margin-left: 20px;
+    border-radius: 5px;
+    border-left: 5px solid rgb(234, 234, 24);
+    margin-top: 20px;
+    margin-right: 20px;
+}
+.order{
+    width: 800px;
+    height: 680px;
+    background-color: white;
+    margin-left: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+.order hr{
+    margin-left: 20px;
+    width: 550px;
+    border-color:yellow;
+}
+.order ul li{
+    list-style-type: none;
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+    color: #D416E5;
+}
+.product{
+    width: 90%;
+    border: 1px solid #ddd;
+    margin-top: 20px;
+    margin-left: 40px;
+    margin-bottom: 20px;
+    height: auto;
+    position: relative;
+    border-radius: 20px;
+}
+.detail-product {
+    position: relative;
+    /* Cố định kích thước cho phần tử cha */
+    width: 90%;
+    padding: 10px;
+    /* border: 1px solid #ccc; */
+    background-color: white;
+    margin-bottom: 10px;
+    height: 44%;
+    margin-left: 30px;
+}
+
+.detail-product img {
+    /* Đặt kích thước ảnh nếu cần */
+    max-width: 50%; /* Đặt chiều rộng tối đa cho hình ảnh */
+    float: left; /* Đẩy hình ảnh sang trái */
+    margin-right: 10px; /* Tạo khoảng cách giữa hình ảnh và tiêu đề */
+    height: 110px;
+    margin-bottom: 50px;
+}
+
+.detail-product h1 {
+    /* Thiết lập kiểu chữ, kích thước, màu sắc, v.v. cho tiêu đề */
+    font-size: 18px;
+    color: #D416E5;
+    margin: 10px 60px;
+    width: 260px;
+}
+
+/* Xóa float để tránh ảnh hưởng đến các phần tử khác */
+.detail-product::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.product-info {
+    display: flex; /* Sử dụng flexbox để sắp xếp các phần tử con theo hàng ngang */
+    align-items: center; /* Căn các phần tử con theo trục dọc */
+    box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.5);
+}
+
+.title-quantity {
+    margin-right: 20px; /* Tạo khoảng cách giữa tiêu đề và số lượng */
+    margin-bottom: 40px;
+}
+
+.price h2{
+    text-align: center;
+    margin-bottom: 35px;
+}
+.detail{
+    width: 400px;
+    height: 680px;
+    background-color: white;
+    margin-left: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+.detail h1{
+    color: rgb(97, 247, 97);
+    font-size: 24px;
+    font-weight: 100;
+    margin-top: 20px;
+    text-align: center;
+}
+.detail h2{
+    margin-left: 20px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+.detail h3{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 100;
+    margin-left: 100px;
+}
+.merge-detail {
+    display: flex;
+}
+
+.merge {
+    flex: 1; 
+}
+
+.detail-label {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-left: 15px;
+     text-decoration: underline;
+      text-decoration-color:#303152;
+}
+
+.detail-info {
+    font-size: 18px;
+    margin-bottom: 10px;
+    margin-left: 45px;
+    color: #605d4d;
+}
+
+.detail h1 {
+    color: rgb(159 97 247);
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}

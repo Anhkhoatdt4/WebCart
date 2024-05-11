@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import dao.CartDAO;
 import dao.CartDetailDAO;
 import dao.ProductDAO;
+import model.Cart;
 import model.Product;
 
 @WebServlet("/home")
@@ -54,7 +55,11 @@ public class ProductServlet extends HttpServlet {
         if (session != null && session.getAttribute("loggedIn") != null) 
         {
 		Integer userID = (Integer) session.getAttribute("userID");
-        session.setAttribute("cartSize", cd.quantityOfCartDetail(a.getCartByUserId(userID).getCartId())); 
+		Cart b = a.getCartByUserId(userID);
+		if ( b != null )
+			{
+				session.setAttribute("cartSize", cd.quantityOfCartDetail(a.getCartByUserId(userID).getCartId())); 
+			}
         }
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }

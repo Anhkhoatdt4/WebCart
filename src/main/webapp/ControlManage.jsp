@@ -24,8 +24,8 @@
             margin-left: 300px;
             margin-top: -8px;
             font-size: 15px;">
-                <li>Trang chủ</li>
-                <li>Sản phẩm</li>
+                <li class = "trangchu">Trang chủ</li>
+                <li >Sản phẩm</li>
                 <li>Khuyến mãi</li>
                 <li>Liên hệ</li>
             </ul>
@@ -38,8 +38,8 @@
                 <ul>
                     <li><a href="#"><img src="https://i.pinimg.com/originals/78/46/75/7846752cfd7b02455fa07c42a5ab2f37.jpg"  class ="image" alt=""></img></a></li>
                     <br>
-                    <li>Kong Bẻo</li>
-                    <li>Chào mừng bạn trở lại</li>
+            		<li class="fa-solid fa-user" style ="margin-left: 60px; margin-bottom: 10px; margin-right: 5px; color: white; font-size:12px"> ${sessionScope.username}</li> 
+            		<li>Chào mừng bạn trở lại</li>
                     <br>
                     <br>
                     <hr>
@@ -47,7 +47,7 @@
 	                    <h1><a href="ControlManage"><button class="but0"><i class="fa-solid fa-landmark"></i> Bảng điều khiển</button></a></h1>
 	                    <h1><a href="manageaccount"><button class="but1"><i class="fa-solid fa-id-card"></i> Quản lý khách hàng</button></a></h1>
 	                    <h1><a href="productManage"><button class="but2"><i class="fa-solid fa-box"></i> Quản lý sản phẩm</button></a></h1>
-	                    <h1><a href="DhangManage"><button class="but3"><i class="fa-solid fa-money-bill-1"></i> Quản lý đơn hàng</button></a></h1>
+	                    <h1><a href="DHangManage"><button class="but3"><i class="fa-solid fa-money-bill-1"></i> Quản lý đơn hàng</button></a></h1>
 	                    <h1><a href="reportManage"><button class="but4"><i class="fa-solid fa-money-check-dollar"></i> Báo cáo doanh thu</button></a></h1>
                 </ul>
             </div>
@@ -146,7 +146,7 @@
 				</div>
                 <div class="chart">
                     <ul style="display: flex; margin-left: 30px;">
-                        <li style="list-style-type: none; margin-top: 20px; font-weight: bold; font-size: 20px;">DỮ LIỆU 6 THÁNG ĐẦU VÀO</li>
+                        <li style="list-style-type: none; margin-top: 20px; font-weight: bold; font-size: 20px;">SO SÁNH DOANH THU TUẦN NÀY VÀ TUẦN TRƯỚC</li>
                     </ul>
                     <br>
                     <hr>
@@ -249,7 +249,7 @@
 
                 <div class="chart2" style=" height:520px;">
                     <ul style="display: flex; margin-left: 30px;">
-                        <li style="list-style-type: none; margin-top: 20px; font-weight: bold; font-size: 20px;">THỐNG KÊ 6 THÁNG DOANH THU</li>
+                        <li style="list-style-type: none; margin-top: 20px; font-weight: bold; font-size: 20px;">THỐNG KÊ DOANH THU 6 THÁNG GẦN ĐÂY</li>
                     </ul>
                     <br>
                     <hr>
@@ -266,6 +266,13 @@
         <footer style="padding: 60px;"></footer>
         
 </body>
+
+<script type="text/javascript">
+	document.querySelector(".trangchu").addEventListener("click",function(){
+		window.location.href = "home";
+	});
+</script>
+
 
 <script type="text/javascript">
 function createChart() {

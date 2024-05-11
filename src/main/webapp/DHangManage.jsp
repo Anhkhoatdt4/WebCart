@@ -102,7 +102,7 @@
                           <tr style="height: 53px;">
                             <th style="width: 12%;">Mã đơn hàng</th>
                             <th style="width: 16%;">Tên khách hàng</th>
-                            <th style="font-size: 15px;  width: 33%;"> Đơn hàng</th>
+                            <th style="font-size: 15px;  width: 31%;"> Đơn hàng</th>
                             <th style="width: 9%;">Số lượng</th>
                             <th style="width: 10%;">Thành tiền</th>
                             <th style="width: 12%;">Tình trạng</th>
@@ -125,6 +125,7 @@
 	                             <td style="width: 100px;">
 	                                <a href="#" class= "delete-btn"><i class="fa-solid fa-trash" style="padding : 0 5px;"></i></a>
 						            <a href="#" class= "edit-btn"  ><i class="fa-solid fa-pen-to-square" style="padding : 0 5px;"></i></a>
+	                            	<a href="#" class= "detail-btn"  ><i class="fa-solid fa-magnifying-glass" style="padding : 0 5px;"></i></a>
 	                            </td>
                             </tr>
                             	</c:if>
@@ -205,6 +206,22 @@ document.querySelectorAll(".edit-btn").forEach(function(button) {
 	            
 	            span.innerHTML = '';
                 span.appendChild(input);
+                
+                if (index === 5) {
+                    var select = document.createElement("select");
+                    var options = [ "Đang vận chuyển", "Đã giao hàng"];
+                    options.forEach(function(option) {
+                        var optionElement = document.createElement("option");
+                        optionElement.text = option;
+                        select.add(optionElement);
+                    });
+                    select.value = text.trim(); 
+                    span.innerHTML = '';
+                    span.appendChild(select);
+                } else {
+                    span.innerHTML = '';
+                    span.appendChild(input);
+                }
         	}
             
             row.classList.add("editing-row");
@@ -220,10 +237,11 @@ document.getElementById("save").addEventListener("click", function() {
         if (row.classList.contains("editing-row")) {
             var inputs = row.querySelectorAll("input");
            
-            
+            var selects = row.querySelectorAll("select");
+			
             var editDatas = {};
             editDatas["orderId"] = inputs[0].value; 
-            editDatas["status"] = inputs[1].value;
+            editDatas["status"] = selects[0].value;
             
             console.log("Edited data:");
             for (var key in editDatas) {
@@ -249,6 +267,7 @@ document.getElementById("save").addEventListener("click", function() {
                     alert("Dữ liệu không hợp lệ.Vui lòng kiểm tra lại"); 
                 } else if (data.message === "success") {
                     alert('Dữ liệu cập nhật thành công');
+                     
                 }
                 else
                 	{
@@ -343,7 +362,45 @@ document.getElementById("save").addEventListener("click", function() {
 	        }
 	    });
 	});
+	
+	document.querySelectorAll(".detail-btn").forEach(function(button){
+	    button.addEventListener("click", function(){
+	        var row = button.closest("tr");
+	        
+	        row.classList.add("detail-row");
 
+	        var orderId = row.querySelector("td").textContent;
+	        console.log("giá trị orderId " + orderId);
+	        fetch('http://localhost:8082/WebCart/OrderDetailAdminServlet',{
+	            method : 'POST',
+	            headers : {
+	                'Content-Type' : 'application/json ; charset=utf-8'
+	            },
+	            body: JSON.stringify({ID : orderId})
+	        })
+	        .then(function(response) {
+	            if (!response.ok) {
+	                throw new Error('Server response error');
+	            }
+	            return response.json();
+	        })
+	        .then(function(data) {
+	        	console.log("phan hoi data");
+	        	if (data.message1 === "OK") {
+                    
+                
+	        	alert("Xem chi tiet don hang");
+	            window.location.href = "DetailOrderAdmin.jsp";
+	        	}
+	        })
+	        .catch(function(error) {
+	            console.error('ERROR:', error);
+	            console.error('STACK TRACE:', error.stack);
+	        });
+
+	    });
+
+	});
 	
 </script>
 

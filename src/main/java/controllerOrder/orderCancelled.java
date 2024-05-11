@@ -44,7 +44,7 @@ public class orderCancelled extends HttpServlet {
 	
 		List<OrderDetail> listOrderDetail = new ArrayList<>();
 		for (Integer orderId : listIdInOrder) {
-		    listOrderDetail.addAll(orderDetailDao.listGetOrderDetail(orderId));
+		    listOrderDetail.add(orderDetailDao.listGetOrderDetail(orderId));
 		}
 
 		session.setAttribute("listOrderDetailsInOrderByCancelled", listOrderDetail);

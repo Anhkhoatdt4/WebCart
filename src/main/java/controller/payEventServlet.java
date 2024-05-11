@@ -3,6 +3,7 @@ package controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,7 +90,15 @@ public class payEventServlet extends HttpServlet {
 	        }
 	        
 	        System.out.println("Request");
-	        request.getRequestDispatcher("payshop.jsp").forward(request, response);
+	       
+	        JSONObject jsonResponse = new JSONObject();
+	        jsonResponse.put("OK", true);
+	        response.setContentType("application/json");
+	        response.setCharacterEncoding("UTF-8");
+		    PrintWriter out = response.getWriter();
+		    out.print(jsonResponse.toString());
+		    out.flush();
+	        
 	    } catch (JSONException e) {
 	        e.printStackTrace();
 	        

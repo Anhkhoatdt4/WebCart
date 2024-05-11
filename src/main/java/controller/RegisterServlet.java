@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.UserDAO;
 import model.User;
+import util.MaHoa;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -41,13 +42,14 @@ public class RegisterServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		String user = request.getParameter("user");
 		String password = request.getParameter("password");
-		
+		password=MaHoa.toSHA1(password);
+
 		HttpSession session = request.getSession(true);
 		UserDAO userDao = new UserDAO();
 	
 		System.out.println();
-		userDao.addUser(new User (userDao.IndexOfUser() + 1,user, password,"",userDao.generateRandomPhoneNumber(), 0));
-		System.out.println(new User (userDao.IndexOfUser() + 1,user, password,"",userDao.generateRandomPhoneNumber(), 0));
+		userDao.addUser(new User (userDao.IndexOfUser() + 1,user, password,"",userDao.generateRandomPhoneNumber(), 0,"",""));
+		System.out.println(new User (userDao.IndexOfUser() + 1,user, password,"",userDao.generateRandomPhoneNumber(), 0,"",""));
 		response.sendRedirect("login.jsp");
 	}
 

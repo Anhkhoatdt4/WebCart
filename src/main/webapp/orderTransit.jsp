@@ -84,12 +84,20 @@
                 <li>Danh sách đơn hàng</li> 
                 <br>
                 <div class="products">
-                    <c:forEach var="order" items="${listOrderDetailsInOrderByTransit}">
+                   <c:set var="prevOrderId" value="" />
+                 <c:forEach var="order" items="${listOrderDetailsInOrderByTransit}">
+                    <c:if test="${order.orderId != prevOrderId}">
+                        <c:set var="prevOrderId" value="${order.orderId}" />
+	                        <div class = "a" style="    position: relative;
+								    top: 40px;
+								    z-index: 2;
+								    color: #eb6363;">
+                        	<h2>Mã đơn hàng: ${order.orderId}</h1> 
+                        </div>
+                    </c:if>
+
                         <div class="detail-product">
                             <div class="product-info">
-                                <div class="msp" style="position: absolute; top: 50px; left: 27px;">
-                                    <span style="color: #da0202;">Mã đơn hàng : #${order.orderId}</span>
-                                </div>
                                 <div class="status" style="position: absolute; top: 51px; right: 16px; color: #14d414; font-size: 17px;">
                                     <span>${Status}</span>
                                 </div>
@@ -113,8 +121,6 @@
                                             <button>Đánh giá</button>
                                             <button>Mua lại</button>
                                         </div>
-                                        <br>
-                                        <br>
                                     </c:if>
                                 </c:forEach>
                             </div>

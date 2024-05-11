@@ -20,7 +20,12 @@
             <a href="home" style="display: inline-block; font-size: 20px ; margin-right: 155px">
                 <i class="fas fa-home"></i> Home
             </a>
-            <h1 style="display: inline-block; font-size: 27px ; color:red">Shopping cart <span> in BKN Shoes</span></h1>
+            <h1 style="display: inline-block; font-size: 27px ; color:#6c14d0">Shopping cart <span style=" 
+    font-family: pyxidium quick;
+    background: linear-gradient(to right, #c72092, #6c14d0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;"> in BKN Shoes</span></h1>
         </div>
     </header>
 
@@ -33,21 +38,31 @@
                         <header>
                            <a class="remove">
 							    <img style="width: 240px;height: 192px" src="${cartDetail.product.pimage}" alt="">
-							    <h3>Remove product</h3>
+							    <h3 style="background: linear-gradient(to right, #c72092, #6c14d0);">Remove product</h3>
 							</a>
                         </header>
                         <div class="content">    
-                            <h1>${cartDetail.product.pname}</h1>     
-                            <h1 style="font-size: 15px">${cartDetail.product.pdesc}</h1> 
+				      <h1 style="margin: 17px 0 20px 0;
+				    font-family: pyxidium quick;
+				    background: linear-gradient(to right, #c72092, #6c14d0);
+				    -webkit-background-clip: text;
+				    -webkit-text-fill-color: transparent;
+				    font-weight: 500;">${cartDetail.product.pname}</h1>     
+                            <h1 style="font-size: 15px ;     margin: 17px 0 20px 0;
+    font-family: pyxidium quick;
+    background: linear-gradient(to right, #c72092, #6c14d0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 500;">${cartDetail.product.pdesc}</h1> 
                         </div>
                         <footer class="content" style="height: 45px;">              
-                            <button class="qt-minus" style="background: #1cc1e4; font-size: 15px;">-</button>
+                            <button class="qt-minus" style="background: linear-gradient(to right, #c72092, #6c14d0); font-size: 15px;">-</button>
                             <span class="qt">${cartDetail.quantity}</span>
-                            <button class="qt-plus" style="background: #1cc1e4; font-size: 15px;">+</button>     
+                            <button class="qt-plus" style="background: linear-gradient(to right, #c72092, #6c14d0); font-size: 15px;">+</button>     
                             <c:forEach var="product" items="${listProd}">
                                 <%-- So sánh pId của sản phẩm trong cartDetail với id của sản phẩm trong listProd --%>
                                 <c:if test="${cartDetail.product.pId eq product.pId}">
-                                    <h2 class="full-price">$ ${product.pprice * cartDetail.quantity}</h2>  
+                                    <h2 class="full-price" style="background: linear-gradient(to right, #c72092, #6c14d0);">$ ${product.pprice * cartDetail.quantity}</h2>  
                                     <input type="hidden" class="hidden-price" value="${product.pprice}">
                                     <input type="checkbox" class="product-checkbox" 
                                         data-product-id="${cartDetail.product.pId}" 
@@ -80,7 +95,7 @@
 
             <div class="right">
                 <h1 class="total">Tổng tiền: <span></span></h1>
-                <a class="btn" href="payshop.jsp">Thanh toán</a>
+                <a class="btn" style="background: linear-gradient(to right, #c72092, #6c14d0);">Thanh toán</a>
             </div>
         </div>
     </footer>
@@ -257,18 +272,21 @@ document.addEventListener('DOMContentLoaded', function(){
                 },
                 body:  JSON.stringify(selectedProducts)
             })
-            .then(response => {
+            .then(function(response ){
                 if (!response.ok) {
                     throw new Error('Lỗi khi gửi dữ liệu đến máy chủ');
                 }
                
                 return response.json();
             })
-            .then(data => {
-   
-                console.log('Dữ liệu phản hồi từ máy chủ:', data);
+            .then(function(data){
+            	 var errorCode = data.OK;
+                 console.log(errorCode);
+                 if (errorCode) {
+            	console.log("phan hoi dataaaa");
+            	    window.location.href= "payshop.jsp";
+                 }
                 
-               /*  window.location.href = 'http://example.com/payment-success'; */
             })
             .catch(error => {
                 console.error('Lỗi:', error);

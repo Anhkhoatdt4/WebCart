@@ -103,17 +103,17 @@ public class orderDatabaseEvent extends HttpServlet {
         Order order = orderDao.searchOrder(id); // tim kiem order co id : userId
         System.out.println(order);
         
+
+        
         List<CartDetail> ListCD = new ArrayList<>();
         ListCD = cdb.getCartDetailsByCartId(cartID);
-        
+ 
         for (int i = 0; i < productsArray.length(); i++) 
         {
             JSONObject product = productsArray.getJSONObject(i);
             String productName = product.getString("name");
             Product productInOrderDatabase = pdb.getProductByName(productName);
-            
-            System.out.println(productInOrderDatabase);
-            
+
             OrderDetail o = new OrderDetail();
 			/*
 			 * CartDetail cd = cdb.getCartDetailByCartIdAndProductId(cartID,
@@ -126,6 +126,7 @@ public class orderDatabaseEvent extends HttpServlet {
             for (CartDetail cd : ListCD) {
 	            if(cd.getProduct().getpId() == productInOrderDatabase.getpId())
 	            {
+					/* System.out.println("ewqewq " + cd) ; */
 		    		o.setQuantity(cd.getQuantity());
 		    		o.setPrice(cd.getTotalMoney());
 	            }
@@ -133,11 +134,11 @@ public class orderDatabaseEvent extends HttpServlet {
     		o.setOrderId(order.getOrderId());
     		boolean success = orderDetailDao.addOrderDetail(o); 
 			
+    		listOrderDetail.add(o);
+    		
 			cdb.deteleCartDetail(cartID, productInOrderDatabase.getpId()); 
 			 
-    		listOrderDetail.add(o);
-    	
-    		
+	
         }
         CartDAO cartDAO = new CartDAO();
         List<CartDetail> cartDetails1 = cartDAO.getCartDetailsByCartId( cartID, pdb);
@@ -145,6 +146,9 @@ public class orderDatabaseEvent extends HttpServlet {
         
         session.setAttribute("cartDetail", cartDetails1);
        
+        session.setAttribute("madonhangg",orderDao.IndexOfUser());
+        int a123 = (int) totalPrice;
+        session.setAttribute("trigiadonhang",a123);
         session.setAttribute("Status",order.getStatus());
         session.setAttribute("listProductInOrder", listProduct);
 		/* session.setAttribute("listOrderDetailsInOrder", listOrderDetail); */

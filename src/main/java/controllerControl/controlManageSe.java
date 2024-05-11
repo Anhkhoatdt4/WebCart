@@ -92,9 +92,10 @@ public class controlManageSe extends HttpServlet {
         else
        	 doanhthumonth=od.getTotalMoneyByMonth(curentYear,currentMonth, curentYear, currentMonth+5 );
 
-        for (int i = 0; i < doanhthumonth.length; i++) {
-            System.out.println("Giá trị thứ " + (i) + ": " + doanhthumonth[i]);
-        }
+		/*
+		 * for (int i = 0; i < doanhthumonth.length; i++) {
+		 * System.out.println("Giá trị thứ " + (i) + ": " + doanhthumonth[i]); }
+		 */
 		OrderDAO oD = new OrderDAO();
 		List<Order> listOrder = oD.getAllOrders();
 		
@@ -122,9 +123,18 @@ public class controlManageSe extends HttpServlet {
 		//session.setAttribute("dsdonhangchitiet", listOrderDetail);
 		session.setAttribute("doanhthu", order);
 		session.setAttribute("doanhthu1", order1);
+		session.setAttribute("tongdonhang", listOrder.size());
 		session.setAttribute("doanhthumonth", doanhthumonth);
-		System.out.println(order[1]);
-
+		
+		System.out.println(1234);
+		 for (int i = 0; i < order.length; i++) {
+		 
+		System.out.println(order[i]);
+		 }
+		 for (int i = 0; i < order1.length; i++) {
+			 
+				System.out.println(order1[i]);
+				 }
 		request.getRequestDispatcher("ControlManage.jsp").forward(request, response);
 	}
 

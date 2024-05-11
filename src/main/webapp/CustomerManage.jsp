@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.Date" %>
+<%@ page import="java.util.Date"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +10,9 @@
 <title>Quản lý khách hàng</title>
 <link rel="stylesheet" href="css/customerManage.css">
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+	integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 <body>
@@ -33,22 +35,45 @@
 						src="https://i.pinimg.com/originals/78/46/75/7846752cfd7b02455fa07c42a5ab2f37.jpg"
 						class="image" alt=""></img></a></li>
 				<br>
-				<li>Kong Bẻo</li>
+				<li class="fa-solid fa-user"
+					style="margin-left: 60px; margin-bottom: 10px; margin-right: 5px; color: white; font-size: 12px">
+					${sessionScope.username}</li>
+
 				<li>Chào mừng bạn trở lại</li>
 				<br>
 				<br>
 				<hr>
 				<br>
-				    <h1><a href="ControlManage"><button class="but0"><i class="fa-solid fa-landmark"></i> Bảng điều khiển</button></a></h1>
-                    <h1><a href="manageaccount"><button class="but1"><i class="fa-solid fa-id-card"></i> Quản lý khách hàng</button></a></h1>
-                    <h1><a href="productManage"><button class="but2"><i class="fa-solid fa-box"></i> Quản lý sản phẩm</button></a></h1>
-                    <h1><a href="DHangManage"><button class="but3"><i class="fa-solid fa-money-bill-1"></i> Quản lý đơn hàng</button></a></h1>
-                    <h1><a href="reportManage"><button class="but4"><i class="fa-solid fa-money-check-dollar"></i> Báo cáo doanh thu</button></a></h1>
+				<h1>
+					<a href="ControlManage"><button class="but0">
+							<i class="fa-solid fa-landmark"></i> Bảng điều khiển
+						</button></a>
+				</h1>
+				<h1>
+					<a href="manageaccount"><button class="but1">
+							<i class="fa-solid fa-id-card"></i> Quản lý khách hàng
+						</button></a>
+				</h1>
+				<h1>
+					<a href="productManage"><button class="but2">
+							<i class="fa-solid fa-box"></i> Quản lý sản phẩm
+						</button></a>
+				</h1>
+				<h1>
+					<a href="DHangManage"><button class="but3">
+							<i class="fa-solid fa-money-bill-1"></i> Quản lý đơn hàng
+						</button></a>
+				</h1>
+				<h1>
+					<a href="reportManage"><button class="but4">
+							<i class="fa-solid fa-money-check-dollar"></i> Báo cáo doanh thu
+						</button></a>
+				</h1>
 			</ul>
 		</div>
 		<div class=" mainn">
 			<div class="button">
-				<button id = "add"
+				<button id="add"
 					style="background-color: #9df99d; border: #9df99d; color: #003c00; width: 150px; height: 40px;">
 					<i class="fa-solid fa-plus"></i> Tạo khách hàng mới
 				</button>
@@ -60,10 +85,13 @@
 					style="background-color: #008c04; border: #008c04; color: #a2ecb5; width: 100px; height: 40px;">
 					<i class="fa-solid fa-file-excel"></i> Xuất Excel
 				</button>
-				
-				<button id = "accept" style="background-color: #14a3cf; border: #d0d0d0; width: 100px; height: 40px;"><i class="fa-solid fa-check"></i> Xác nhận</button>
-				<button id = "save"
-					style="background-color: rgb(235 25 25); border: #008c04; color: #a2ecb5; width: 100px; height: 40px;">
+
+				<button id="accept"
+					style="background-color: #14a3cf; border: #d0d0d0; width: 100px; height: 40px;">
+					<i class="fa-solid fa-check"></i> Xác nhận
+				</button>
+				<button id="save"
+					style="background-color: rgb(235, 25, 25); border: #008c04; color: #a2ecb5; width: 100px; height: 40px;">
 					<i class="fa-solid fa-floppy-disk"></i></i> Lưu thay đổi
 				</button>
 			</div>
@@ -71,14 +99,11 @@
 			<hr class="line">
 			<br>
 			<div class=" find">
-                    <li>Tìm kiếm:</li>
-                    <input type="text" id="searchInput" style="    border-radius: 6px;
-					    height: 25px;
-					    margin-top: -4px;
-					    background-color: rgb(234, 233, 233);
-					    margin-left: 5px;" placeholder="Nhập từ khóa tìm kiếm">
-					             </div>
-			
+				<li>Tìm kiếm:</li> <input type="text" id="searchInput"
+					style="border-radius: 6px; height: 25px; margin-top: -4px; background-color: rgb(234, 233, 233); margin-left: 5px;"
+					placeholder="Nhập từ khóa tìm kiếm">
+			</div>
+
 			<div>
 				<table class="custom-table">
 					<thead>
@@ -93,37 +118,43 @@
 					</thead>
 					<tbody>
 						<c:forEach var="userDetail" items="${listUserDetail}">
-						    <c:forEach var="user" items="${ListUser}">
-						        <c:if test="${user.userid eq userDetail.userId}">
-						            <tr>
-						                <td><span>${userDetail.userId}</span></td>
-						                <td><span>${userDetail.fullname}</span></td>
-						                <td><span>${user.username}</span></td>
-						                <td><span>${user.password}</span></td>
-						                <td><span>${user.uPhone}</span></td>
-						                <td style="width: 100px;">
-						                    <a href="#" class= "delete-btn"><i class="fa-solid fa-trash" style="padding : 0 15px;"></i></a>
-						                    <a href="#" class="edit-btn"><i class="fa-solid fa-pen-to-square" style="padding : 0 20px;"></i></a>
-						                </td>
-						            </tr>
-						        </c:if>
-						    </c:forEach>
+							<c:forEach var="user" items="${ListUser}">
+								<c:if test="${user.userid eq userDetail.userId}">
+									<tr>
+										<td><span>${userDetail.userId}</span></td>
+										<td><span>${userDetail.fullname}</span></td>
+										<td><span>${user.username}</span></td>
+										<td><span>${user.password}</span></td>
+										<td><span>${user.uPhone}</span></td>
+										<td style="width: 100px;"><a href="#" class="delete-btn"><i
+												class="fa-solid fa-trash" style="padding: 0 15px;"></i></a> <a
+											href="#" class="edit-btn"><i
+												class="fa-solid fa-pen-to-square" style="padding: 0 20px;"></i></a>
+										</td>
+									</tr>
+								</c:if>
+							</c:forEach>
 						</c:forEach>
 
-						
+
 					</tbody>
 				</table>
 			</div>
 		</div>
 	</div>
-	    <div class="time">
-	        <ul style="display: flex; margin-left: 30px;">
-	            <li style="list-style-type: none; margin-top: 10px; font-weight: bold; font-size: 14px;">Danh sách khách hàng</li>
-	        </ul>
-	        <ul id="currentTime" style="display: flex; float: right; margin-right: 30px;">
-	            <li style="list-style-type: none; margin-top: -16px; font-weight: bold; font-size: 14px;">Thứ 3, 09/04/2024 - 17:05:10</li>
-	        </ul>
-	   </div>
+	<div class="time">
+		<ul style="display: flex; margin-left: 30px;">
+			<li
+				style="list-style-type: none; margin-top: 10px; font-weight: bold; font-size: 14px;">Danh
+				sách khách hàng</li>
+		</ul>
+		<ul id="currentTime"
+			style="display: flex; float: right; margin-right: 30px;">
+			<li
+				style="list-style-type: none; margin-top: -16px; font-weight: bold; font-size: 14px;">Thứ
+				3, 09/04/2024 - 17:05:10</li>
+		</ul>
+	</div>
 </body>
 <script>
     function deleteUser(userId) {

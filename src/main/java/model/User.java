@@ -6,6 +6,10 @@ public class User {
 	private String password;
 	private String address;
 	private String uPhone;
+	private String email;
+
+	private String fullname;
+
 	private int role;
 	
 	public User() {
@@ -20,6 +24,25 @@ public class User {
 		this.address = address;
 		this.uPhone = uPhone;
 		this.role = role;
+	}
+
+	public User(int userid, String username, String password, String address, String uPhone, int role,
+			String fullname, String email) {
+		super();
+		this.userid = userid;
+		this.username = username;
+		this.password = password;
+		this.address = address;
+		this.uPhone = uPhone;
+		this.email = email;
+		this.fullname = fullname;
+		this.role = role;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userid=" + userid + ", username=" + username + ", password=" + password + ", address=" + address
+				+ ", uPhone=" + uPhone + ", email=" + email + ", fullname=" + fullname + ", role=" + role + "]";
 	}
 
 	public int getUserid() {
@@ -46,14 +69,6 @@ public class User {
 		this.password = password;
 	}
 
-	public String getuPhone() {
-		return uPhone;
-	}
-
-	public void setuPhone(String uPhone) {
-		this.uPhone = uPhone;
-	}
-
 	public String getAddress() {
 		return address;
 	}
@@ -62,18 +77,36 @@ public class User {
 		this.address = address;
 	}
 
+	public String getuPhone() {
+		return uPhone;
+	}
+
+	public void setuPhone(String uPhone) {
+		this.uPhone = uPhone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getFullname() {
+		return fullname;
+	}
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
+
 	public int getRole() {
 		return role;
 	}
 
 	public void setRole(int role) {
 		this.role = role;
-	}
-
-	@Override
-	public String toString() {
-		return "User [userid=" + userid + ", username=" + username + ", password=" + password + ", address=" + address
-				+ ", uPhone=" + uPhone + ", role=" + role + "]";
 	}
 
 	

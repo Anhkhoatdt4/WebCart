@@ -78,53 +78,55 @@
             <div class = "text"></div>
         </div>
      <div class="content">
-    <div class="product-form">
-        <div class="customer-info">
-            <ul>
-                <li>Danh sách đơn hàng</li> 
-                <br>
-                <div class="products">
-                    <c:forEach var="order" items="${listOrderDetailsInOrder}">
-                        <div class="detail-product">
-                            <div class="product-info">
-                                <div class="msp" style="position: absolute; top: 50px; left: 27px;">
-                                    <span style="color: #da0202;">Mã đơn hàng : #${order.orderId}</span>
-                                </div>
-                                <div class="status" style="position: absolute; top: 51px; right: 16px; color: #14d414; font-size: 17px;">
-                                    <span>${Status}</span>
-                                </div>
-                                <c:forEach var="product" items="${listProductInOrder}">
-                                    <c:if test="${product.pId eq order.productID}">
-                                        <img src="${product.pimage}" alt="" style="width: 110px ; height: 110px;">
-                                        <div class="title-quantity">
-                                            <h1>${product.pname}</h1>
-                                            <h3>${product.pprice}</h3>
-                                            <h4>Tổng số sản phẩm : ${order.quantity}</h4>
-                                        </div>
-                                        <div class="price">
-                                            <h2 class="price">Thành tiền</h2>
-                                            <h5 class="price">${order.price}</h5>
-                                        </div>
-                                        <div class="evaluate" style="    
-                                        position : absolute;
-                                        right: 10px;
-									    top: 250px;
-									}">
-                                            <button>Đánh giá</button>
-                                            <button>Mua lại</button>
-                                        </div>
-                                        <br>
-                                        <br>
-                                    </c:if>
-                                </c:forEach>
-                            </div>
+		 <div class="product-form">
+    <div class="customer-info">
+        <ul>
+            <li>Danh sách đơn hàng</li>
+            <div class="products">
+                <c:set var="prevOrderId" value="" />
+                <c:forEach var="order" items="${listOrderDetailsInOrder}">
+                    <c:if test="${order.orderId != prevOrderId}">
+                        <c:set var="prevOrderId" value="${order.orderId}" />
+	                        <div class = "a" style="    position: relative;
+								    top: 40px;
+								    z-index: 2;
+								    color: #eb6363;">
+                        	<h2>Mã đơn hàng: ${order.orderId}</h1> 
                         </div>
-                    </c:forEach>
-                </div>
-            </ul>
-          
-        </div>
+                    </c:if>
+                    <div class="detail-product">
+                        <div class="product-info">
+                            <div class="status" style="position: absolute; top: 51px; right: 16px; color: #14d414; font-size: 17px;">
+                                <span>${Status}</span>
+                            </div>
+                            <c:forEach var="product" items="${listProductInOrder}">
+                                <c:if test="${product.pId eq order.productID}">
+                                    <img src="${product.pimage}" alt="" style="width: 110px ; height: 110px;">
+                                    <div class="title-quantity">
+                                        <h1>${product.pname}</h1>
+                                        <h3>${product.pprice}</h3>
+                                        <h4>Tổng số sản phẩm : ${order.quantity}</h4>
+                                    </div>
+                                    <div class="price">
+                                        <h2 class="price">Thành tiền</h2>
+                                        <h5 class="price">${order.price}</h5>
+                                    </div>
+                                    <div class="evaluate" style="position: absolute; right: 10px; top: 250px;">
+                                        <button>Đánh giá</button>
+                                        <button>Mua lại</button>
+                                    </div>
+                                </c:if>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </ul>
     </div>
+</div>
+
+
+
 </div>
     </div>
 </body>

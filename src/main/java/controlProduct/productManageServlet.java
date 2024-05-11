@@ -36,7 +36,6 @@ public class productManageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 				HttpSession session  = request.getSession(true);
-				System.out.println("Product Servlet");
 				ProductDAO proDao= new ProductDAO();
 				List<Product> listPro= proDao.getAll();
 				session.setAttribute("ListProduct", listPro);

@@ -129,28 +129,37 @@
             </li>
 
             <div class="checkout-form">
-
+				<c:set var="user" value="${sessionScope.user}" />
                 <form action="" method="post">
                     <div class="form-group">
                         <label for="name">Họ và tên:</label>
-                        <input type="text" id="name" name="name" required placeholder="Nguyễn Anh Khoa"
+                       <input type="text" id="name" name="name" required placeholder="${sessionScope.username}" value="${sessionScope.username}"
                             style="   border: 2px solid #9b1261;">
                     </div>
                     <div class="form-group">
                         <label for="phone">Số điện thoại:</label>
-                        <input type="tel" id="phone" name="phone" required placeholder="0774488418">
+                        <input type="tel" id="phone" name="phone" required placeholder="${sessionScope.UserPhone}" value = "${sessionScope.username}">
                     </div>
-                    <div class="form-group">
+                     <div class="form-group">
                         <label for="address">Địa chỉ giao hàng:</label>
-                        <textarea id="address" name="address" rows="" required
-                            placeholder="Phú Lộc , Thừa Thiên Huế"></textarea>
+                       <textarea id="address" name="address" required placeholder="${sessionScope.UserAddress}">${sessionScope.UserAddress}</textarea>
+
+                        <input type="hidden" id="sessionAddress" value = "${sessionScope.UserAddress}">
+                        
                     </div>
                     <div class="form-group">
                         <label for="delivery" style="">Chọn hình thức giao hàng:</label>
+                        <select id="delivery11" name="delivery" required style="    border: 2px solid #9b1261;">
+                            <option value="standard11">Giao hàng tiêu chuẩn ($2)</option>
+                            <option value="express11">Giao hàng nhanh ($4)</option>
+                            <option value="self-pickup11">Tự đến lấy hàng</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="delivery" style="">Chọn hình thức thanh toán:</label>
                         <select id="delivery" name="delivery" required style="    border: 2px solid #9b1261;">
-                            <option value="standard">Giao hàng tiêu chuẩn ($2)</option>
-                            <option value="express">Giao hàng nhanh ($4)</option>
-                            <option value="self-pickup">Tự đến lấy hàng</option>
+                            <option value="express">Thanh toán bằng tiền mặt</option>
+                            <option value="self-pickup">Thanh toán bằng VN PAY</option>
                         </select>
                     </div>
                     <button class="btn-submit" type="submit" onclick="submitForm()">Đặt hàng</button>
@@ -161,88 +170,112 @@
     </div>
 
     <script>
-        function submitForm() {
-            event.preventDefault(); 
-            var products = [];
-            var productInfos = document.querySelectorAll(".product-info");
-            
-            console.log(productInfos);
-            
-            productInfos.forEach(function(productInfo) {
-                var productName = productInfo.querySelector("h1").textContent;
-                var product = { name: productName };
-                products.push(product);
-            });
-            
-            var totalPriceElement = document.querySelector(".total-price h2");
-            var totalPriceText = totalPriceElement.textContent.trim(); 
-            var totalPrice = parseFloat(totalPriceText.replace("$", ""));
-            console.log(totalPrice);
-            console.log(totalPriceElement);
-            var name = document.getElementById("name").value;
-            var phone = document.getElementById("phone").value;
-            var address = document.getElementById("address").value;
-            
-            var data = { 
-            	products: products ,
-            	name : name ,
-            	phone : phone , 
-            	address: address,
-            	totalPrice : totalPrice,
-         
-            };
-            
-           /*  console.log("Products:", products);
-            console.log("Name:", name);
-            console.log("Phone:", phone);
-            console.log("Address:", address); */
-            
-            
-            
-            fetch("http://localhost:8082/WebCart/orderDatabaseEvent", {
-            	
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(function(response) {
-                if (!response.ok) {
-                    throw new Error('Lỗi phản hồi từ máy chủ. Mã trạng thái: ' + response.status);
-                }
-                return response.json(); 
-            })
-            .then(function(data) {
-                
-                console.log(data);
-                alert('Đặt hàng thành công!');
-                window.location.href = "home"
-                
-            })
-            .catch(function(error) {
-                console.error('Error:', error); 
-                alert('Đặt hàng thất bại!');
-            });
+    
+    function createData(products, name, phone, address, oldAddress, totalPrice) {
+        return { 
+            products: products ,
+            name : name ,
+            phone : phone , 
+            address: address,
+            oldaddress: oldAddress,
+            totalPrice : totalPrice
+        };  
+    }
+     
+    
+    document.addEventListener("DOMContentLoaded", function() {
+
+    	console.log("TIME OUT ");
+        window.setTimeout(function() {
+            window.location.reload();
+
+            setInterval(function() {
+
+                window.location.reload();
+            }, 5 * 60 * 1000); 
+        }, 60 * 1000); 
+    });
+    
+    function submitForm() {
+        event.preventDefault(); 
         
+        // Lấy giá trị của phương thức thanh toán
+        var deliveryMethod = document.getElementById("delivery").value;
         
+        var products = [];
+        var productInfos = document.querySelectorAll(".product-info");
+        
+        productInfos.forEach(function(productInfo) {
+            var productName = productInfo.querySelector("h1").textContent;
+            var product = { name: productName };
+            products.push(product);
+        });
+        
+        var totalPriceElement = document.querySelector(".total-price h2");
+        var totalPriceText = totalPriceElement.textContent.trim(); 
+        var totalPrice = parseFloat(totalPriceText.replace("$", ""));
+        console.log(totalPrice);
+        console.log(totalPriceElement);
+        var name = document.getElementById("name").value;
+        var phone = document.getElementById("phone").value;
+        var address = document.getElementById("address").value;
+        var sessionAddress = document.getElementById("sessionAddress").value;
+        console.log(sessionAddress);
+        var data={};
+
+        if (address !== sessionAddress) { // So sánh địa chỉ mới với địa chỉ trong session
+            if (confirm("Bạn có muốn lưu thay đổi địa chỉ không?")) { // Hiển thị thông báo hỏi người dùng
+                data = createData(products, name, phone, address, sessionAddress, totalPrice, "");
+            }
+            else {
+                data = createData(products, name, phone, address, "", totalPrice, "");
+            }
         }
+        else {
+            data = createData(products, name, phone, address, "", totalPrice, "");
+        }
+
+        console.log(data);
+        
+        // Gửi yêu cầu đặt hàng đến máy chủ
+        fetch("http://localhost:8082/WebCart/orderDatabaseEvent", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(function(response) {
+            if (!response.ok) {
+                throw new Error('Lỗi phản hồi từ máy chủ. Mã trạng thái: ' + response.status);
+            }
+            return response.json(); 
+        })
+        .then(function(data) {
+            console.log(data);
+            alert('Đặt hàng thành công!');
+            
+            // Kiểm tra phương thức thanh toán và chuyển hướng tương ứng
+            if (deliveryMethod === "express") {
+                // Thanh toán khi nhận hàng
+                alert('Thanh toán khi nhận hàng');
+                // Chuyển hướng về trang chủ
+                window.location.href = "home";
+            } else if (deliveryMethod === "self-pickup") {
+                window.location.href = "processPayment";
+            }
+        })
+        .catch(function(error) {
+            console.error('Error:', error); 
+            alert('Đặt hàng thất bại!');
+        });
+    }
         
         
         
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
         
         
 	// tong tien 

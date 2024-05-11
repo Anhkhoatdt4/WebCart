@@ -11,6 +11,8 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
 	integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="shortcut icon" href="image/logo.png">
+
 
 </head>
 <body>
@@ -33,7 +35,8 @@
 						src="https://i.pinimg.com/originals/78/46/75/7846752cfd7b02455fa07c42a5ab2f37.jpg"
 						class="image" alt=""></img></a></li>
 				<br>
-				<li>Kong Bẻo</li>
+				<li class="fa-solid fa-user" style ="margin-left: 60px; margin-bottom: 10px; margin-right: 5px; color: white; font-size:12px"> ${sessionScope.username}</li> 
+
 				<li>Chào mừng bạn trở lại</li>
 				<br>
 				<br>
@@ -137,7 +140,7 @@
                 </div>
                 
 	<div class="overlay"></div>
-	<div class="form">
+	<div class="form" style="margin-top: 314px;">
 		<ul>
 		<li
 			style="list-style-type: none; font-size: 22px; font-weight: bold; color: #e80eb9;
@@ -145,15 +148,16 @@
 			 Thông tin sản phẩm
 			</li>
 			</ul>
-		<form id="myForm" action="addProductServlet" method="post" accept-charset="UTF-8">
+		<form id="myForm" action="addProductServlet" method="post"
+			accept-charset="UTF-8" enctype="multipart/form-data">
 		
 			<div class="form_gr">
 				<label for="Name">Tên sản phẩm:</label> <input type="text" id="Name"
 					name="Name" required placeholder="Giày Lacosete ...">
 			</div>
 			<div class="form_gr">
-				<label for="Photo">Đường dẫn ảnh sản phẩm:</label> 
-    			<input type="text" id="Photo" name="Photo" required>
+				<label for="Photo">Chọn hình ảnh sản phẩm:</label> 
+    			<input type="file" id="Photo" name="Photo" accept="Photo/*" required>
 			</div>
 			<div class="merge">
 				<div class="form_gr">
@@ -180,8 +184,14 @@
 				</div>
 			</div>
 			<div class="form_gr">
-				<label for="Type">Danh mục</label> <input type="text" id="Type"
-					name="Type" required placeholder="Nike">
+				<label for="Type">Danh mục</label> <select id="Type"
+					name="Type" required >
+					<option value="Nike">Nike</option>
+					<option value="Adidas">Adidas</option>
+					<option value="Puma">Puma</option>
+					<option value="Lacoste">Lacoste</option>
+					</select>
+					
 			</div>
 			<div class="form_gr">
 				<label for="Description">Mô tả:</label>
@@ -267,7 +277,7 @@
 		    }
 		}
 	</script>
-	
+
 	<script type="text/javascript">
 	document.querySelectorAll(".edit-btn").forEach(function(button) {
 	    button.addEventListener("click", function() {
@@ -350,7 +360,7 @@
 	});
 	
 	</script>
-	
+
 	<script type="text/javascript">
 	document.getElementById("searchInput").addEventListener("input", function(){
 	    var keyword = this.value.trim().toLowerCase();
