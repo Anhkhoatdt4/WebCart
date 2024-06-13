@@ -1,4 +1,4 @@
-package dao;
+package repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -42,11 +42,29 @@ public class UserEmailDAO {
 		return 0;
 	}
 	
+	public static String getEmail(int id)
+	{
+		Connection conn = DBContext.getConnection();
+		try {
+			String sql = "select email FROM user_email WHERE userid=?";
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setInt(1, id);
+			ResultSet rs = st.executeQuery();
+			 if (rs.next()) {
+	                return rs.getString("email");
+	            }
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+		
+	}
+	
 	
 	
 	
 	public static void main(String[] args) {
-
+			System.out.println(getEmail(1));
 	}
 
 }

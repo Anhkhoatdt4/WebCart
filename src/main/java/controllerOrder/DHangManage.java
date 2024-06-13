@@ -4,8 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,11 +18,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
-import dao.OrderDAO;
-import dao.OrderDetailDAO;
-import dao.ProductDAO;
-import dao.UserDAO;
-import dao.UserDetailDao;
+import repository.*;
 import model.Order;
 import model.OrderDetail;
 import model.Product;
@@ -66,22 +64,38 @@ public class DHangManage extends HttpServlet {
 		List<OrderDetail> listOrderDetail =  odd.getAllOrderDetails();
 		
 		
-		List<Object[]> dataList = new ArrayList<>();
-		
+		/*
+		 * List<Object[]> dataList = new ArrayList<>();
+		 * 
+		 * for (Order order : listOrder) { for (OrderDetail orderDetail :
+		 * listOrderDetail) { if (order.getOrderId() == orderDetail.getOrderId()) {
+		 * Object[] data = new Object[6]; data[0] = order.getOrderId(); data[1] =
+		 * order.getTotalMoney(); data[2] = order.getUserId(); data[3] =
+		 * order.getStatus(); data[4] = orderDetail.getProductID(); data[5] =
+		 * orderDetail.getQuantity(); dataList.add(data); } } }
+		 */
+		Set<Integer> processedOrders = new HashSet<>();
+		 List<Object[]> dataList = new ArrayList<>();
 		for (Order order : listOrder) {
-            for (OrderDetail orderDetail : listOrderDetail) {
-                if (order.getOrderId() == orderDetail.getOrderId()) {
-                    Object[] data = new Object[6];
-                    data[0] = order.getOrderId();
-                    data[1] = order.getTotalMoney();
-                    data[2] = order.getUserId();
-                    data[3] = order.getStatus();
-                    data[4] = orderDetail.getProductID();
-                    data[5] = orderDetail.getQuantity();
-                    dataList.add(data);
-                }
-            }
-        }
+		    for (OrderDetail orderDetail : listOrderDetail) {
+		        if (order.getOrderId() == orderDetail.getOrderId() && !processedOrders.contains(order.getOrderId())) {
+		            Object[] data = new Object[6];
+		            data[0] = order.getOrderId();
+		            data[1] = order.getTotalMoney();
+		            data[2] = order.getUserId();
+		            data[3] = order.getStatus();
+		            data[4] = orderDetail.getProductID();
+		            data[5] = orderDetail.getQuantity();
+		            dataList.add(data);
+
+		            // Mark this order as processed
+		            processedOrders.add(order.getOrderId());
+		            
+		            // Break the inner loop to move to the next order
+		            break;
+		        }
+		    }
+		}
 		
 
 		

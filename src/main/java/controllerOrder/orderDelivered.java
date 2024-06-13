@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.OrderDAO;
-import dao.OrderDetailDAO;
-import dao.ProductDAO;
+import repository.*;
 import model.OrderDetail;
 import model.Product;
 

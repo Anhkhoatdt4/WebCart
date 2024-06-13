@@ -53,7 +53,6 @@ document.getElementById("confirmButton").onclick = function() {
             alert("Mã OTP bạn nhập không chính xác");
             window.location.href = "OTP.jsp";
         } else if (errorCode === "202" || errorCode == 202) {
-            alert("Đã gửi OTP tới email của bạn!");
             window.location.href = "resetPass.jsp";
         } else {
             alert("Mã lỗi không xác định: " + errorCode);

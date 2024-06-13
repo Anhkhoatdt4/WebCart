@@ -19,11 +19,7 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import dao.CartDAO;
-import dao.CartDetailDAO;
-import dao.OrderDAO;
-import dao.OrderDetailDAO;
-import dao.ProductDAO;
+import repository.*;
 import model.CartDetail;
 import model.Order;
 import model.OrderDetail;
@@ -147,6 +143,9 @@ public class orderDatabaseEvent extends HttpServlet {
         session.setAttribute("cartDetail", cartDetails1);
        
         session.setAttribute("madonhangg",orderDao.IndexOfUser());
+        
+       
+        
         int a123 = (int) totalPrice;
         session.setAttribute("trigiadonhang",a123);
         session.setAttribute("Status",order.getStatus());

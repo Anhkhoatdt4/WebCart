@@ -1,3 +1,4 @@
+<%@page import="repository.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"  isELIgnored="false"%>
 <%@page import="model.CartDetail"%>
 <%@page import="java.util.List"%>
@@ -88,6 +89,12 @@
             <p class="order-id" >Mã đơn hàng: ${sessionScope.madonhangg} trị giá:<strong>$ ${trigiadonhang}</strong></p>
             <a href="home" class="button" style="background: linear-gradient(to right, #c72092, #6c14d0);">Tiếp tục mua sắm</a>
             <a href="orderManage" class="button" style="background: linear-gradient(to right, #c72092, #6c14d0);">Chi tiết đơn hàng</a>
+            
+            <%
+           		int orderId = Integer.parseInt( session.getAttribute("madonhangg").toString());
+            	OrderDAO orderDAO = new OrderDAO();
+            	orderDAO.updateOrderStatus(orderId, "Đang vận chuyển");
+            %>
         </div>
     </div>
 

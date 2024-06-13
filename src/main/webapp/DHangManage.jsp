@@ -28,18 +28,18 @@
             </ul>
         </div>
         <div class ="container">
-            <div class ="menu">
+            <div class ="menu" style="height: auto;">
                 <ul>
                     <li><a href="#"><img src="https://i.pinimg.com/originals/78/46/75/7846752cfd7b02455fa07c42a5ab2f37.jpg"  class ="image" alt=""></img></a></li>
                     <br>
-                    <li>Kong Bẻo</li>
+                    <li class="fa-solid fa-user" style ="margin-left: 60px; margin-bottom: 10px; margin-right: 5px; color: white; font-size:12px"> ${sessionScope.username}</li>
                     <li>Chào mừng bạn trở lại</li>
                     <br>
                     <br>
                     <hr>
                     <br>
                    		<h1><a href="ControlManage"><button class="but0"><i class="fa-solid fa-landmark"></i> Bảng điều khiển</button></a></h1>
-	                    <h1><a href="manageaccount"><button class="but1"><i class="fa-solid fa-id-card"></i> Quản lý khách hàng</button></a></h1>
+	                    <h1><a href="manageaccount"><button class="but1"><i class="fa-solid fa-id-card"></i> Quản lý tài khoản</button></a></h1>
 	                    <h1><a href="productManage"><button class="but2"><i class="fa-solid fa-box"></i> Quản lý sản phẩm</button></a></h1>
 	                    <h1><a href="DHangManage"><button class="but3"><i class="fa-solid fa-money-bill-1"></i> Quản lý đơn hàng</button></a></h1>
 	                    <h1><a href="reportManage"><button class="but4"><i class="fa-solid fa-money-check-dollar"></i> Báo cáo doanh thu</button></a></h1>
@@ -102,7 +102,7 @@
                           <tr style="height: 53px;">
                             <th style="width: 12%;">Mã đơn hàng</th>
                             <th style="width: 16%;">Tên khách hàng</th>
-                            <th style="font-size: 15px;  width: 31%;"> Đơn hàng</th>
+                            <th style="font-size: 15px;  width: 31%;"> Sản phẩm</th>
                             <th style="width: 9%;">Số lượng</th>
                             <th style="width: 10%;">Thành tiền</th>
                             <th style="width: 12%;">Tình trạng</th>
@@ -123,7 +123,7 @@
 	                            <td>${DL[1]}</td>
 	                            <td>${DL[3]}</td>
 	                             <td style="width: 100px;">
-	                                <a href="#" class= "delete-btn"><i class="fa-solid fa-trash" style="padding : 0 5px;"></i></a>
+	                                <!-- <a href="#" class= "delete-btn"><i class="fa-solid fa-trash" style="padding : 0 5px;"></i></a> -->
 						            <a href="#" class= "edit-btn"  ><i class="fa-solid fa-pen-to-square" style="padding : 0 5px;"></i></a>
 	                            	<a href="#" class= "detail-btn"  ><i class="fa-solid fa-magnifying-glass" style="padding : 0 5px;"></i></a>
 	                            </td>
@@ -188,47 +188,60 @@ function exportToExcel() {
 
 
 
-document.querySelectorAll(".edit-btn").forEach(function(button) {
-    button.addEventListener("click", function() {
-        var row = button.closest("tr");
-        var spans = row.querySelectorAll("td"); 
+	document.querySelectorAll(".edit-btn").forEach(function(button) {
+	    button.addEventListener("click", function() {
+	        var row = button.closest("tr");
+	        var spans = row.querySelectorAll("td");
 
-        spans.forEach(function(span , index) {
-        	if ( index == 0 || index == 5)
-        	{
-	            var text = span.textContent; 
-	            var input = document.createElement("input");
-	            input.type = "text";
-	            input.style.textAlign = "center";
-	            input.style.border = "none";
-	            input.style.padding = "4px 8px";
-	            input.value = text; 
-	            
-	            span.innerHTML = '';
-                span.appendChild(input);
-                
-                if (index === 5) {
-                    var select = document.createElement("select");
-                    var options = [ "Đang vận chuyển", "Đã giao hàng"];
-                    options.forEach(function(option) {
-                        var optionElement = document.createElement("option");
-                        optionElement.text = option;
-                        select.add(optionElement);
-                    });
-                    select.value = text.trim(); 
-                    span.innerHTML = '';
-                    span.appendChild(select);
-                } else {
-                    span.innerHTML = '';
-                    span.appendChild(input);
-                }
-        	}
-            
-            row.classList.add("editing-row");
-        });
-        console.log('con cac');
-    });
-});
+	        spans.forEach(function(span , index) {
+	            if ( index == 0 || index == 5) {
+	                var text = span.textContent; 
+	                var input = document.createElement("input");
+	                input.type = "text";
+	                input.style.textAlign = "center";
+	                input.style.border = "none";
+	                input.style.padding = "4px 8px";
+	                input.value = text.trim(); 
+	                
+	                span.innerHTML = '';
+	                span.appendChild(input);
+	                
+	                if (index === 5) {
+	                    var select = document.createElement("select");
+	                    select.id = "mySelect";
+	                    var options = [];
+	                    if (text.trim() === "Chờ xác nhận") {
+	                        options = ["Chờ xác nhận", "Đang vận chuyển", "Đã hủy"];
+	                    } else if (text.trim() === "Đang vận chuyển") {
+	                        options = ["Đang vận chuyển", "Đã giao hàng", "Đã hủy"];
+	                    } else {
+	                        var optionElement = document.createElement("option");
+	                        optionElement.text = text.trim();
+	                        select.add(optionElement);
+	                        select.disabled = true;
+	                    }
+
+	                    options.forEach(function(option) {
+	                        var optionElement = document.createElement("option");
+	                        optionElement.text = option;
+	                        select.add(optionElement);
+	                    });
+
+	                    span.innerHTML = '';
+	                    span.appendChild(select);
+	                    select.value = text.trim();
+	                } else {
+	                    span.innerHTML = '';
+	                    span.appendChild(input);
+	                }
+
+	            }
+	            row.classList.add("editing-row");
+	        });
+	    });
+	});
+
+
 
 
 
@@ -267,7 +280,7 @@ document.getElementById("save").addEventListener("click", function() {
                     alert("Dữ liệu không hợp lệ.Vui lòng kiểm tra lại"); 
                 } else if (data.message === "success") {
                     alert('Dữ liệu cập nhật thành công');
-                     
+                    window.location.href="DHangManage";
                 }
                 else
                 	{
@@ -321,7 +334,7 @@ document.getElementById("save").addEventListener("click", function() {
                     return response.json();
                 })
                 .then(function(data) {
-                    if (data.message === "Xóa tài khoản thành công") {
+                    if (data.message === "Xóa đơn hàng thành công") {
                         row.remove();
                     }
                     alert(data.message); // Hiển thị thông báo từ máy chủ

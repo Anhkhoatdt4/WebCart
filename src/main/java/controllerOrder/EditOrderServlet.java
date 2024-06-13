@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
-
-import dao.OrderDAO;
+import repository.*;
 import login.EmailSender;
 
 /**
@@ -62,7 +61,7 @@ public class EditOrderServlet extends HttpServlet {
 		    
 		    
 		    EmailSender emailSender = new EmailSender();
-		    emailSender.sendShipmentConfirmationEmail("trannhattan410@gmail.com" , orderDao.getProductNamesByOrderId(orderId));
+		    emailSender.sendShipmentConfirmationEmail("trannhattan410@gmail.com" , orderDao.getProductNamesByOrderId(orderId) , status);
 		    
 		    PrintWriter out = response.getWriter();
 		    JSONObject jResponse = new JSONObject();

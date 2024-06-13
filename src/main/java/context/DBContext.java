@@ -21,4 +21,8 @@ public class DBContext {
 		}
 		return connection;
 }
+	public static void main(String[] args) {
+		Connection con = DBContext.getConnection();
+		System.out.println("thanh cong");
+	}
 }

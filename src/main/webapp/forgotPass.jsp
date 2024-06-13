@@ -58,7 +58,7 @@ document.getElementById("confirmButton").addEventListener("click", function() {
             alert("Email không tồn tại!");
             window.location.href = "forgotPass.jsp";
         } else if (errorCode === "202" || errorCode == 202 ) {
-            alert("Đã gửi OTP tới email của bạn!");
+         /*    alert("Đã gửi OTP tới email của bạn!"); */
             window.location.href = "OTP.jsp";
         } else {
             alert("Mã lỗi không xác định: " + errorCode);

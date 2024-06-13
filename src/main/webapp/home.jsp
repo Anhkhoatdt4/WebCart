@@ -179,7 +179,7 @@
 
     </section>
 
-    <div class="products" id="Products">
+    <div class="products" id="Products" style="margin-top: 50px;">
     <h1>Products</h1>
     	<div class="box">
     	
@@ -237,10 +237,49 @@
     </div>
     
     
-    
-    
 </div>
 
+
+<div class="products" id="Products" style=" margin-top: 180px;  margin-bottom: -390px;">
+        <h1>Discover Our Latest Top 4 Picks</h1>
+
+        <div class="box">
+        <c:forEach var = "entry" items="${map}">
+        <c:set var="categoryId" value="${entry.key}" />
+   		<c:set var="maxProductId" value="${entry.value}" />
+   			 <c:forEach var = "p" items="${listProductInHome}">
+   			 <c:if test="${maxProductId eq p.pId}">
+            <div class="card">
+
+                <div class="small_card">
+                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-share"></i>
+                </div>
+
+                <div class="image">
+                    <img src="${p.pimage}">
+                </div>
+
+              <div class="products_text">
+	                <h2 style="font-size: 16px; width: 250px; height: 46px;">${p.pname}</h2>
+	                <%-- <p>${p.pdesc}</p> --%>
+	                <h3>$ ${p.pprice}</h3>
+	                <div class="products_star">
+	                    <i class="fa-solid fa-star"></i>
+	                    <i class="fa-solid fa-star"></i>
+	                    <i class="fa-solid fa-star"></i>
+	                    <i class="fa-solid fa-star"></i>
+	                    <i class="fa-regular fa-star-half-stroke"></i>
+	                </div>
+	                <a href="detailproduct?pid=${p.pId}" class="btn">Add To Cart</a>
+	            </div>
+
+            </div>
+            </c:if>
+            </c:forEach>
+			</c:forEach>
+        </div>
+    </div>
 
 
 

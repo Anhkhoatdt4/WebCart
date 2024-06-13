@@ -1,4 +1,4 @@
-package dao;
+package repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -35,6 +35,23 @@ public class ProductDAO {
 	    }
 	}
 
+	public Map<Integer, Integer> getMaxProductIdForEachCategory() {
+        Map<Integer, Integer> maxProductIds = new HashMap<>();
+        String sql = "SELECT category_id, MAX(pid) AS maxId FROM product GROUP BY category_id";
+        try (Connection connection = DBContext.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                int categoryId = resultSet.getInt("category_id");
+                int maxProductId = resultSet.getInt("maxId");
+                maxProductIds.put(categoryId, maxProductId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return maxProductIds;
+    }
 	
 	
 	public int getMaxProductId(int cid) {

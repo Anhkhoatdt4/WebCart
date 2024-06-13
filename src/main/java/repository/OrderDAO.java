@@ -1,4 +1,4 @@
-package dao;
+package repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -175,6 +175,7 @@ public class OrderDAO {
 			st.setInt(2, monthStart);
 			st.setInt(3, yearEnd);
 			st.setInt(4, monthEnd);
+			System.out.println(monthStart + " " +  monthEnd);
 			int i = 0;
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {

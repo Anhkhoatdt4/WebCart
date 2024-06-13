@@ -12,11 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import dao.CartDAO;
-import dao.OrderDAO;
-import dao.OrderDetailDAO;
-import dao.UserDAO;
-import dao.UserDetailDao;
+import repository.*;
 
 /**
  * Servlet implementation class deleteAccountServlet

@@ -1,4 +1,4 @@
-package dao;
+package repository;
 
 import java.io.FileInputStream;
 import java.io.IOException;

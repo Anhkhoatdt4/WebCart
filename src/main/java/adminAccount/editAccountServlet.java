@@ -14,8 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import dao.UserDAO;
-import dao.UserDetailDao;
+import repository.*;
 import model.User;
 
 /**

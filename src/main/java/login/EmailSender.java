@@ -46,7 +46,7 @@ public class EmailSender {
         }
     }
     
-    public void sendShipmentConfirmationEmail(String recipientEmail, List<String> productNames) {
+    public void sendShipmentConfirmationEmail(String recipientEmail, List<String> productNames, String status) {
         final String username = "khoanguyenanh218@gmail.com";
         final String password = "zlcs dynx wutq ddpc";
 
@@ -70,7 +70,7 @@ public class EmailSender {
 
             StringBuilder emailContent = new StringBuilder();
             emailContent.append("Chào bạn,\n\n");
-            emailContent.append("Đơn hàng của bạn đã được vận chuyển thành công. Dưới đây là danh sách sản phẩm đã đặt:\n");
+            emailContent.append("Đơn hàng của bạn " + status + " . Dưới đây là danh sách sản phẩm đã đặt:\n");
             for (String productName : productNames) {
                 emailContent.append("- ").append(productName).append("\n");
             }

@@ -26,7 +26,7 @@
 	<div class="header">
 		<ul
 			style="display: flex; margin-left: 300px; margin-top: -8px; font-size: 15px;">
-			<li>Trang chủ</li>
+			<li class="trangchu">Trang chủ</li>
 			<li>Sản phẩm</li>
 			<li>Khuyến mãi</li>
 			<li>Liên hệ</li>
@@ -36,13 +36,13 @@
 		</ul>
 	</div>
 	<div class="container">
-		<div class="menu">
+		<div class="menu" style="height: auto;">
 			<ul>
 				<li><a href="#"><img
 						src="https://i.pinimg.com/originals/78/46/75/7846752cfd7b02455fa07c42a5ab2f37.jpg"
 						class="image" alt=""></img></a></li>
 				<br>
-				<li>Kong Bẻo</li>
+				<li class="fa-solid fa-user" style ="margin-left: 60px; margin-bottom: 10px; margin-right: 5px; color: white; font-size:12px"> ${sessionScope.username}</li>
 				<li>Chào mừng bạn trở lại</li>
 				<br>
 				<br>
@@ -55,7 +55,7 @@
 				</h1>
 				<h1>
 					<a href="manageaccount"><button class="but1">
-							<i class="fa-solid fa-id-card"></i> Quản lý khách hàng
+							<i class="fa-solid fa-id-card"></i> Quản lý tài khoản
 						</button></a>
 				</h1>
 				<h1>
@@ -514,6 +514,10 @@
 				createChart();
 
 			};
+			
+			document.querySelector(".trangchu").addEventListener("click",function(){
+	    		window.location.href = "home";
+	    	});
 		</script>
 </body>
 </html>

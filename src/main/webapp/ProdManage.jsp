@@ -19,7 +19,7 @@
 	<div class="header">
 		<ul
 			style="display: flex; margin-left: 300px; margin-top: -8px; font-size: 15px;">
-			<li>Trang chủ</li>
+			 <li class = "trangchu">Trang chủ</li>
 			<li>Sản phẩm</li>
 			<li>Khuyến mãi</li>
 			<li>Liên hệ</li>
@@ -43,7 +43,7 @@
 				<hr>
 				<br>
 				<h1><a href="ControlManage"><button class="but0"><i class="fa-solid fa-landmark"></i> Bảng điều khiển</button></a></h1>
-                    <h1><a href="manageaccount"><button class="but1"><i class="fa-solid fa-id-card"></i> Quản lý khách hàng</button></a></h1>
+                    <h1><a href="manageaccount"><button class="but1"><i class="fa-solid fa-id-card"></i> Quản lý tài khoản</button></a></h1>
                     <h1><a href="productManage"><button class="but2"><i class="fa-solid fa-box"></i> Quản lý sản phẩm</button></a></h1>
                     <h1><a href="DHangManage"><button class="but3"><i class="fa-solid fa-money-bill-1"></i> Quản lý đơn hàng</button></a></h1>
                     <h1><a href="reportManage"><button class="but4"><i class="fa-solid fa-money-check-dollar"></i> Báo cáo doanh thu</button></a></h1>
@@ -93,7 +93,7 @@
 					<tbody>
 						<c:forEach var="product1" items="${ListProduct}">
 					    <c:forEach var="category2" items="${ListCate}">
-					        <c:if test="${product1.category_id == category2.cid}">
+					         <c:if test="${product1.category_id == category2.cid}">
 					        <c:if test="${product1.psize ne 0 }">
 					            <tr>
 					                <td>${product1.pId}</td>
@@ -139,69 +139,64 @@
 			        
                 </div>
                 
-	<div class="overlay"></div>
-	<div class="form" style="margin-top: 314px;">
-		<ul>
-		<li
-			style="list-style-type: none; font-size: 22px; font-weight: bold; color: #e80eb9;
-			 margin-top: 10px; margin-left: 140px; font-weight: 700;">
-			 Thông tin sản phẩm
-			</li>
-			</ul>
-		<form id="myForm" action="addProductServlet" method="post"
-			accept-charset="UTF-8" enctype="multipart/form-data">
-		
-			<div class="form_gr">
-				<label for="Name">Tên sản phẩm:</label> <input type="text" id="Name"
-					name="Name" required placeholder="Giày Lacosete ...">
-			</div>
-			<div class="form_gr">
-				<label for="Photo">Chọn hình ảnh sản phẩm:</label> 
-    			<input type="file" id="Photo" name="Photo" accept="Photo/*" required>
-			</div>
-			<div class="merge">
-				<div class="form_gr">
-					<label for="Quantity" style="margin-right: 50px;">Số lượng:</label>
-					<input type="number" id="Quantity" name="Quantity" required
-						placeholder="10">
-				</div>
-				<div class="form_gr">
-					<label for="Size">Size:</label> <input type="number" id="Size"
-						name="Size" required placeholder="42">
-				</div>
-			</div>
-			<div class="merge">
-				<div class="form_gr">
-					<label for="State">Trạng thái:</label> <select id="State"
-						name="State" required>
-						<option value="have">Còn hàng</option>
-						<option value="haven't">Hết hàng</option>
-					</select>
-				</div>
-				<div class="form_gr">
-					<label for="Price">Giá tiền: (đơn vị: USD)</label> <input
-						type="number" id="Price" name="Price" required placeholder="199">
-				</div>
-			</div>
-			<div class="form_gr">
-				<label for="Type">Danh mục</label> <select id="Type"
-					name="Type" required >
-					<option value="Nike">Nike</option>
-					<option value="Adidas">Adidas</option>
-					<option value="Puma">Puma</option>
-					<option value="Lacoste">Lacoste</option>
-					</select>
-					
-			</div>
-			<div class="form_gr">
-				<label for="Description">Mô tả:</label>
-				<textarea id="Description" name="Description" rows="4" required
-					placeholder="Mô tả sản phẩm ở đây"></textarea>
-			</div>
-			<button class="but" onclick="cancelForm()" style="float: right;">Cancel</button>
-			<input type="submit" onclick="submitForm()" value="Submit">
-		</form>
-	</div>
+	<div class="overlay" id="overlay"></div>
+<div class="form" id="formContainer">
+    <ul>
+        <li style="list-style-type: none; font-size: 22px; font-weight: bold; color: #e80eb9; margin-top: 10px; margin-left: 140px; font-weight: 700;    ">
+            Thông tin sản phẩm
+        </li>
+    </ul>
+    <form id="myForm" action="addProductServlet" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+        <!-- Form fields go here -->
+        <div class="form_gr">
+            <label for="Name">Tên sản phẩm:</label> 
+            <input type="text" id="Name" name="Name" required placeholder="Giày Lacoste ...">
+        </div>
+        <div class="form_gr">
+            <label for="Photo">Chọn hình ảnh sản phẩm:</label> 
+            <input type="file" id="Photo" name="Photo" accept="Photo/*" required>
+        </div>
+        <div class="merge">
+            <div class="form_gr">
+                <label for="Quantity" style="margin-right: 50px;">Số lượng:</label>
+                <input type="number" id="Quantity" name="Quantity" required placeholder="10">
+            </div>
+            <div class="form_gr">
+                <label for="Size">Size:</label> 
+                <input type="number" id="Size" name="Size" required placeholder="42">
+            </div>
+        </div>
+        <div class="merge">
+            <div class="form_gr">
+                <label for="State">Trạng thái:</label> 
+                <select id="State" name="State" required>
+                    <option value="have">Còn hàng</option>
+                    <option value="haven't">Hết hàng</option>
+                </select>
+            </div>
+            <div class="form_gr">
+                <label for="Price">Giá tiền: (đơn vị: USD)</label> 
+                <input type="number" id="Price" name="Price" required placeholder="199">
+            </div>
+        </div>
+        <div class="form_gr">
+            <label for="Type">Danh mục</label> 
+            <select id="Type" name="Type" required>
+                <option value="Nike">Nike</option>
+                <option value="Adidas">Adidas</option>
+                <option value="Puma">Puma</option>
+                <option value="Lacoste">Lacoste</option>
+            </select>
+        </div>
+        <div class="form_gr">
+            <label for="Description">Mô tả:</label>
+            <textarea id="Description" name="Description" rows="4" required placeholder="Mô tả sản phẩm ở đây"></textarea>
+        </div>
+        <button class="but" onclick="cancelForm()" style="float: right;">Cancel</button>
+        <input type="submit" onclick="submitForm()" value="Submit">
+    </form>
+</div>
+
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
 			var form = document.getElementById("myForm");
@@ -285,7 +280,7 @@
 	        var spans = row.querySelectorAll("td");
 
 	        spans.forEach(function(span, index) {
-	            if (index > 0 && index !== 2 && index !== 6 &&index !== 7) { 
+	            if (index > 0 && index !== 2 && index !== 4 && index !== 6 &&index !== 7) { 
 	                var text = span.textContent;
 	                var input = document.createElement("input");
 	                input.type = "text";
@@ -385,5 +380,9 @@
 	    });
 	});
 	</script>
-	
+	<script type="text/javascript">
+	document.querySelector(".trangchu").addEventListener("click",function(){
+		window.location.href = "home";
+	});
+</script>
 </body>

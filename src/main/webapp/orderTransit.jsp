@@ -99,11 +99,11 @@
                         <div class="detail-product">
                             <div class="product-info">
                                 <div class="status" style="position: absolute; top: 51px; right: 16px; color: #14d414; font-size: 17px;">
-                                    <span>${Status}</span>
+                                    <span>Đang vận chuyển</span>
                                 </div>
                                 <c:forEach var="product" items="${listProductInOrder}">
                                     <c:if test="${product.pId eq order.productID}">
-                                        <img src="${product.pimage}" alt="" style="width: 110px ; height: 110px;">
+                                         <img class = "detail-btn" src="${product.pimage}" alt="" style="width: 110px ; height: 110px;" data-id="${order.orderId}">
                                         <div class="title-quantity">
                                             <h1>${product.pname}</h1>
                                             <h3>${product.pprice}</h3>
@@ -149,4 +149,43 @@
         var myorder = document.querySelector('.myorder');
         myorder.classList.toggle('active');
     }
+    document.querySelectorAll(".detail-btn").forEach(button =>{
+		button.addEventListener("click",function(){
+			const orderElement = button.closest(".detail-btn");
+			
+			console.log("Giá trị của data-id:", orderElement);
+			const orderId = orderElement.getAttribute("data-id");
+
+			console.log("Giá trị của data-id:", orderId);
+
+	        
+	        fetch('http://localhost:8082/WebCart/OrderDetailUserServlet', {
+	            method: 'POST',
+	            headers : {
+	                'Content-Type' : 'application/json ; charset=utf-8'
+	            },
+	            body: JSON.stringify({ID : orderId })
+	        })
+	        .then(function(response) {
+	            if (!response.ok) {
+	                throw new Error('Server response error');
+	            }
+	            return response.json();
+	        })
+	        .then(function(data) {
+	        	console.log("phan hoi data");
+	        	if (data.message1 === "OK") {
+               
+	            window.location.href = "OrderDetailUser.jsp";
+	        	}
+	        })
+	        .catch(function(error) {
+	            console.error('ERROR:', error);
+	            console.error('STACK TRACE:', error.stack);
+	        });
+
+	    });
+			
+
+	});
 </script>

@@ -19,6 +19,9 @@
     </div>
     <div class="right" >
         <h1>Đăng kí tài khoản!</h1>
+        
+         <p style="color: red">${sessionScope.DKMessage}</p>
+        
         <form action="register" method="post" onsubmit="return validateForm()">
             <p>Tên người dùng</p>
             <div class="user">

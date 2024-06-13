@@ -14,11 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.OrderDAO;
-import dao.OrderDetailDAO;
-import dao.ProductDAO;
-import dao.UserDAO;
-import dao.UserDetailDao;
+import repository.*;
 //import dao.UserDetailDao;
 import model.Order;
 import model.OrderDetail;
@@ -55,6 +51,17 @@ public class controlManageSe extends HttpServlet {
 		UserDAO uD = new UserDAO();
 		List<User> listUser = uD.getAllAccount();
 		
+		if ( session != null)
+		{
+			
+			 int role = Integer.parseInt(session.getAttribute("roleUser").toString());
+			 System.out.println(role);
+			 
+			
+			
+			 if ( role != 1 ) response.sendRedirect("home.jsp"); else {
+			 
+		
 		/*
 		 * OrderDAO oD = new OrderDAO(); List<Order> listOrder = oD.getAllOrders();
 		 * 
@@ -87,10 +94,11 @@ public class controlManageSe extends HttpServlet {
 
         
         double[] doanhthumonth;
+        
         if (currentMonth<6)
         	 doanhthumonth=od.getTotalMoneyByMonth(12-(6-currentMonth)+1,curentYear-1, currentMonth, curentYear );
         else
-       	 doanhthumonth=od.getTotalMoneyByMonth(curentYear,currentMonth, curentYear, currentMonth+5 );
+       	 doanhthumonth=od.getTotalMoneyByMonth(currentMonth,curentYear, currentMonth+5, curentYear );
 
 		/*
 		 * for (int i = 0; i < doanhthumonth.length; i++) {
@@ -127,15 +135,14 @@ public class controlManageSe extends HttpServlet {
 		session.setAttribute("doanhthumonth", doanhthumonth);
 		
 		System.out.println(1234);
-		 for (int i = 0; i < order.length; i++) {
 		 
-		System.out.println(order[i]);
-		 }
-		 for (int i = 0; i < order1.length; i++) {
+		 for (int i = 0; i < doanhthumonth.length; i++) {
 			 
-				System.out.println(order1[i]);
+				System.out.println(doanhthumonth[i]);
 				 }
 		request.getRequestDispatcher("ControlManage.jsp").forward(request, response);
+			}
+		}
 	}
 
 	/**

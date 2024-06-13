@@ -17,10 +17,7 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import dao.CartDAO;
-import dao.CartDetailDAO;
-import dao.ProductDAO;
+import repository.*;
 import model.Cart;
 import model.CartDetail;
 import model.Product;

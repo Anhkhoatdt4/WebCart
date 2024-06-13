@@ -133,13 +133,13 @@
                 <form action="" method="post">
                     <div class="form-group">
                         <label for="name">Họ và tên:</label>
-                       <input type="text" id="name" name="name" required placeholder="${sessionScope.username}" value="${sessionScope.username}"
+                       <input type="text" id="name" name="name" required placeholder="${sessionScope.username}" value="${sessionScope.FullName}"
                             style="   border: 2px solid #9b1261;">
                     </div>
-                    <div class="form-group">
-                        <label for="phone">Số điện thoại:</label>
-                        <input type="tel" id="phone" name="phone" required placeholder="${sessionScope.UserPhone}" value = "${sessionScope.username}">
-                    </div>
+					<div class="form-group">
+					    <label for="phone">Số điện thoại:</label>
+					    <input type="tel" id="phone" name="phone" required placeholder="${sessionScope.UserPhone}" value="${sessionScope.UserPhone}" pattern="[0-9]*" title="Chỉ nhập số" onkeypress="return isNumberKey(event)">
+					</div>
                      <div class="form-group">
                         <label for="address">Địa chỉ giao hàng:</label>
                        <textarea id="address" name="address" required placeholder="${sessionScope.UserAddress}">${sessionScope.UserAddress}</textarea>
@@ -158,7 +158,7 @@
                     <div class="form-group">
                         <label for="delivery" style="">Chọn hình thức thanh toán:</label>
                         <select id="delivery" name="delivery" required style="    border: 2px solid #9b1261;">
-                            <option value="express">Thanh toán bằng tiền mặt</option>
+                            <option value="express">Thanh toán khi nhận hàng</option>
                             <option value="self-pickup">Thanh toán bằng VN PAY</option>
                         </select>
                     </div>
@@ -170,6 +170,14 @@
     </div>
 
     <script>
+    
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
     
     function createData(products, name, phone, address, oldAddress, totalPrice) {
         return { 

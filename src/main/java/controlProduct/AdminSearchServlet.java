@@ -8,9 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import dao.CategoryDAO;
-import dao.ProductDAO;
+import repository.*;
 import model.Category;
 import model.Product;
 

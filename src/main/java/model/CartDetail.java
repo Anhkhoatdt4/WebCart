@@ -22,10 +22,9 @@ public class CartDetail implements Serializable{
         this.cartId = cartId;
         this.product = product;
         this.quantity = quantity;
-        this.totalMoney = product.getPprice() * quantity; // Tính tổng tiền khi khởi tạo
+        this.totalMoney = product.getPprice() * quantity; 
     }
 
-    // Các phương thức getter và setter
 
     public int getCartDetailId() {
         return cartDetailId;

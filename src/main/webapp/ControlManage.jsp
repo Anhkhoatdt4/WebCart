@@ -30,7 +30,7 @@
                 <li>Liên hệ</li>
             </ul>
             <ul>
-                <li><a href="#"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+                <li><a href="logout"><i class="fa-solid fa-right-from-bracket"></i></a></li>
             </ul>
         </div>
         <div class ="container">
@@ -45,7 +45,7 @@
                     <hr>
                     <br>
 	                    <h1><a href="ControlManage"><button class="but0"><i class="fa-solid fa-landmark"></i> Bảng điều khiển</button></a></h1>
-	                    <h1><a href="manageaccount"><button class="but1"><i class="fa-solid fa-id-card"></i> Quản lý khách hàng</button></a></h1>
+	                    <h1><a href="manageaccount"><button class="but1"><i class="fa-solid fa-id-card"></i> Quản lý tài khoản</button></a></h1>
 	                    <h1><a href="productManage"><button class="but2"><i class="fa-solid fa-box"></i> Quản lý sản phẩm</button></a></h1>
 	                    <h1><a href="DHangManage"><button class="but3"><i class="fa-solid fa-money-bill-1"></i> Quản lý đơn hàng</button></a></h1>
 	                    <h1><a href="reportManage"><button class="but4"><i class="fa-solid fa-money-check-dollar"></i> Báo cáo doanh thu</button></a></h1>
@@ -190,7 +190,7 @@
 					<%
 					double[] doanhthu2 = (double[]) session.getAttribute("doanhthumonth");
 					StringBuilder doanhthuString2 = new StringBuilder();
-					for (int i = 0; i < doanhthu2.length; i++) {
+					for (int i = 1; i < doanhthu2.length; i++) {
 						doanhthuString2.append(doanhthu2[i]);
 						// Thêm dấu phẩy nếu không phải là phần tử cuối cùng
 						if (i < doanhthu2.length - 1) {
@@ -207,9 +207,9 @@
                     <canvas id="canvas"></canvas>
                 </div>
                 
-                script
+                
             </div>
-	            <div class="merge2" ">
+	            <div class="merge2">
 					    <div class="cus" style=" height:520px;" >
 					        <ul style="display: flex; margin-left: 30px;">
 					            <li style="list-style-type: none; margin-top: 20px; font-weight: bold; font-size: 20px;">KHÁCH HÀNG MỚI</li>

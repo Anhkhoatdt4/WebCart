@@ -13,9 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import model.User;
 import model.UserDetail;
-import dao.ProductDAO;
-import dao.UserDAO;
-import dao.UserDetailDao;
+import repository.*;
 
 /**
  * Servlet implementation class ManageAccount

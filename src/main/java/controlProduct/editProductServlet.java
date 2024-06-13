@@ -13,9 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import dao.OrderDAO;
-import dao.ProductDAO;
-
+import repository.*;
 /**
  * Servlet implementation class editProductServlet
  */

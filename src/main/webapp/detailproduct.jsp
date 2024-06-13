@@ -20,7 +20,7 @@
                 <h1><span> BKN</span> Shoes</span></h1>
             </div>
 
-            <div class="banner">
+            <div class="banner" style="width: 31%">
                 <ul class="ul-header">
                     <li><a href="home">Home</a></li>
                     <li><a href="#Nike" class="a_header">Products</a>

@@ -1,4 +1,4 @@
-package dao;
+package repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -135,10 +135,28 @@ public class UserDetailDao {
 		 return list;
 	 }
 	
+	public static String getFullName(int id)
+	{
+		Connection conn = DBContext.getConnection();
+		try {
+			String sql = "select fullname FROM user_detail WHERE id=?";
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setInt(1, id);
+			ResultSet rs = st.executeQuery();
+			 if (rs.next()) {
+	                return rs.getString("fullname");
+	            }
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
+	
 	
 	public static void main(String[] args) {
 		UserDetailDao a = new UserDetailDao();
 		System.out.println(a.getIdByUserDetail());
 		System.out.println(a.getUserDetailList());
+		System.out.println(a.getFullName(1));
 	}
 }

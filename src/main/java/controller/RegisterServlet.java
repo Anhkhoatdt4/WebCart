@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.UserDAO;
+import repository.*;
 import model.User;
 import util.MaHoa;
 
@@ -46,11 +46,19 @@ public class RegisterServlet extends HttpServlet {
 
 		HttpSession session = request.getSession(true);
 		UserDAO userDao = new UserDAO();
-	
+		
+		User checkUser = userDao.login(user, password);
+		if ( checkUser == null)
+		{
 		System.out.println();
 		userDao.addUser(new User (userDao.IndexOfUser() + 1,user, password,"",userDao.generateRandomPhoneNumber(), 0,"",""));
-		System.out.println(new User (userDao.IndexOfUser() + 1,user, password,"",userDao.generateRandomPhoneNumber(), 0,"",""));
 		response.sendRedirect("login.jsp");
+		}
+		else
+		{
+			session.setAttribute("DKMessage", "Tài khoản đã tồn tại!.");
+			request.getRequestDispatcher("register.jsp").forward(request, response);
+		}
 	}
 
 }

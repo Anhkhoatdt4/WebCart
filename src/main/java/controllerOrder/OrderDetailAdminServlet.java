@@ -15,8 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
-import dao.OrderDAO;
-import dao.OrderDetailDAO;
+import repository.*;
 import model.Order;
 import model.Product;
 

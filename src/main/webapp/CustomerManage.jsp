@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quản lý khách hàng</title>
+<title>Quản lý tài khoản</title>
 <link rel="stylesheet" href="css/customerManage.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -19,7 +19,7 @@
 	<div class="header">
 		<ul
 			style="display: flex; margin-left: 300px; margin-top: -8px; font-size: 15px;">
-			<li>Trang chủ</li>
+			 <li class = "trangchu">Trang chủ</li>
 			<li>Sản phẩm</li>
 			<li>Khuyến mãi</li>
 			<li>Liên hệ</li>
@@ -51,7 +51,7 @@
 				</h1>
 				<h1>
 					<a href="manageaccount"><button class="but1">
-							<i class="fa-solid fa-id-card"></i> Quản lý khách hàng
+							<i class="fa-solid fa-id-card"></i> Quản lý tài khoản
 						</button></a>
 				</h1>
 				<h1>
@@ -73,14 +73,11 @@
 		</div>
 		<div class=" mainn">
 			<div class="button">
-				<button id="add"
-					style="background-color: #9df99d; border: #9df99d; color: #003c00; width: 150px; height: 40px;">
-					<i class="fa-solid fa-plus"></i> Tạo khách hàng mới
-				</button>
-				<button
+			 
+			<!-- 	<button
 					style="background-color: #bfbeef; border: #bfbeef; color: #03009a; width: 100px; height: 40px;">
 					<i class="fa-solid fa-print"></i> In dữ liệu
-				</button>
+				</button> -->
 				<button onclick="exportToExcel()"
 					style="background-color: #008c04; border: #008c04; color: #a2ecb5; width: 100px; height: 40px;">
 					<i class="fa-solid fa-file-excel"></i> Xuất Excel
@@ -146,7 +143,7 @@
 		<ul style="display: flex; margin-left: 30px;">
 			<li
 				style="list-style-type: none; margin-top: 10px; font-weight: bold; font-size: 14px;">Danh
-				sách khách hàng</li>
+				sách tài khoản</li>
 		</ul>
 		<ul id="currentTime"
 			style="display: flex; float: right; margin-right: 30px;">
@@ -189,7 +186,7 @@
         return input;
     }
 
-    document.getElementById("add").addEventListener("click", function(){
+    /* document.getElementById("add").addEventListener("click", function(){
         var newRow = document.createElement("tr");
         var IdCell = document.createElement("td");
         var NameCell = document.createElement("td");
@@ -220,7 +217,7 @@
         newRow.appendChild(funCell);
 
         document.querySelector(".custom-table tbody").appendChild(newRow);
-    });
+    }); */
 
     
     document.getElementById("accept").addEventListener("click", function() {
@@ -465,6 +462,9 @@
     	    }
     	}
     	
+    	document.querySelector(".trangchu").addEventListener("click",function(){
+    		window.location.href = "home";
+    	});
     	
     	
 </script>

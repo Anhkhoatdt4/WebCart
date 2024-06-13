@@ -15,12 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.CategoryDAO;
-import dao.OrderDAO;
-import dao.OrderDetailDAO;
-import dao.ProductDAO;
-import dao.UserDAO;
-import dao.UserDetailDao;
+import repository.*;
 //import dao.UserDetailDao;
 import model.Category;
 import model.Order;
@@ -101,9 +96,9 @@ public class reportManageServlet extends HttpServlet {
 		List<OrderDetail> listOrderDetail =  odd.getAllOrderDetails();
 		
 
-		List<Product> top5Products = pdb.getTop5Product("2024-04-14");
+		List<Product> top5Products = pdb.getTop5Product("2024-05-31");
 		 
-		Map<Product, Integer> productAndQuantity = pdb.getProductAndQuantity("04");
+		Map<Product, Integer> productAndQuantity = pdb.getProductAndQuantity("05");
 
 		List<Object[]> dataList = new ArrayList<>();
 		
@@ -125,10 +120,10 @@ public class reportManageServlet extends HttpServlet {
 				  } 
 			} 
 		}
-		 
-		for ( int i=0;i<loaigiay.length;i++)
+		 System.out.println("loi nhuan");
+		for ( int i=0;i<loinhuantuannay.length;i++)
 		{
-			System.out.println(loaigiay[i]);
+			System.out.println(loinhuantuannay[i]);
 		}
 		
 		System.out.println("Bao cao doanh thu");
